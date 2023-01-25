@@ -1,4 +1,4 @@
-# @changed 2023.01.26, 01:52
+# @changed 2023.01.26, 02:21
 # @see https://eslint.org/docs/rules/
 root: true
 extends:
@@ -10,23 +10,9 @@ env:
   node: true
   # dom: true
 rules:
-  # no-unused-private-class-members: warn
   no-unused-vars:
     - warn
     - argsIgnorePattern: ^_
-  # DEBUG: Check rule behavior
-  # no-magic-numbers: [
-  #   "warn",
-  #   {
-  #     ignore: [
-  #       -1,
-  #       0,
-  #       1
-  #     ],
-  #     ignoreArrayIndexes: true,
-  #     ignoreDefaultValues: true
-  #   }
-  # ]
   no-console: warn
   no-debugger: warn
   no-extra-semi: warn
@@ -41,4 +27,3 @@ rules:
     - warn
     - always
     # - omitLastInOneLineBlock: true
-
