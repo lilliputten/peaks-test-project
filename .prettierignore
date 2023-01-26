@@ -1,0 +1,8 @@
+node_modules
+build
+coverage
+.history
+.husky
+.vscode
+.dependencygraph
+package-lock.*

@@ -50,7 +50,7 @@
       "runtimeExecutable": "node",
       // "outputCapture" : "std",
       // "protocol": "inspector",
-      "console": "integratedTerminal",
-    },
+      "console": "integratedTerminal"
+    }
   ]
 }

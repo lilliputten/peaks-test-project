@@ -52,7 +52,7 @@ tsconfig.tsbuildinfo
 /publish*
 
 # Generated files...
-# /src/global/cssParams/cssParams.*
+# /src/global/css-params-generated.*
 
 # Temporariy, swap, log & ignored files
 .git-rename-and-replace.log
