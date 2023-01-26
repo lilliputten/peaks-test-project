@@ -8,8 +8,8 @@ ErrorDocument 404 /404.html
 ErrorDocument 403 /404.html
 
 # General auth files
-AuthUserFile /home/g/goldenjeru/golden-jewelery.ru/.security/.htpasswd
-AuthGroupFile /home/g/goldenjeru/golden-jewelery.ru/.security/.htgroups
+AuthUserFile /home/g/goldenjeru/.security/.htpasswd
+AuthGroupFile /home/g/goldenjeru/.security/.htgroups
 
 # Allow/disallow rules...
 AuthName peaks-test-project
