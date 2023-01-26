@@ -6,4 +6,3 @@
 import * as build from './build';
 
 export const DEBUG = build.DEBUG;
-
