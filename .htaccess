@@ -14,8 +14,8 @@ AuthGroupFile /home/g/goldenjeru/.security/.htgroups
 # Allow/disallow rules...
 AuthName peaks-test-project
 AuthType Basic
-# Require valid-user # NOTE: Not for production mode! Use these restrictions only for demos.
-Require group admin
+Require valid-user # NOTE: Not for production mode! Use these restrictions only for demos.
+# Require group admin
 
 # Remove .html extensions...
 RewriteEngine On
