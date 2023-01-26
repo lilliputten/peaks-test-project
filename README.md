@@ -1,11 +1,11 @@
 <!--
-@changed 2023.01.26, 02:26
+@changed 2023.01.26, 19:27
 -->
 
 # Peaks nextjs static client app
 
 - Version: 0.0.0
-- Last changes timestamp: 2023.01.26, 02:26
+- Last changes timestamp: 2023.01.26, 18:07
 
 ## Install
 
@@ -17,7 +17,7 @@ npm i
 
 ## Start dev server
 
-Start dev server (locate in browser with `http://localhost:3000/agreement`):
+Start dev server (locate in browser with `http://localhost:3000`):
 
 ```
 npm run dev
@@ -28,3 +28,13 @@ npm run dev
 ```
 npm run build
 ```
+
+## Build and publish
+
+For success publishing the deploy environment should be propeply set up (see
+npm script command `postinstall-publish-submodule`).
+
+```
+npm run build-and-publish
+```
+
