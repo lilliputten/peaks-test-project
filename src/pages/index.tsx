@@ -1,7 +1,10 @@
+import { Inter } from '@next/font/google';
 import classNames from 'classnames';
+
 import Head from 'next/head';
 import Image from 'next/image';
-import { Inter } from '@next/font/google';
+// import config from '@/config';
+
 import styles from '@/styles/Home.module.css';
 import testStyles from './index.module.scss';
 
@@ -30,7 +33,7 @@ export default function Home() {
             >
               By{' '}
               <Image
-                src="/vercel.svg"
+                src="/images/vercel.svg"
                 alt="Vercel Logo"
                 className={styles.vercelLogo}
                 width={100}
@@ -44,7 +47,7 @@ export default function Home() {
         <div className={styles.center}>
           <Image
             className={styles.logo}
-            src="/next.svg"
+            src="/images/next.svg"
             alt="Next.js Logo"
             width={180}
             height={37}
@@ -52,7 +55,7 @@ export default function Home() {
           />
           <div className={styles.thirteen}>
             <Image
-              src="/thirteen.svg"
+              src="/images/thirteen.svg"
               alt="13"
               width={40}
               height={31}
