@@ -24,7 +24,7 @@ rules:
     - warn
     - always
 overrides:
-  -  # Typescript files (ts,tsx)...
+  - # Typescript files (ts,tsx)...
     files: '**/*.+(ts|tsx)'
     extends:
       - 'eslint:recommended'
@@ -132,7 +132,7 @@ overrides:
         - 'warn'
         - indentMode: 2
           ignoreTernaryOperator: false
-  -  # Typescript tests (spec.{ts|tsx})...
+  - # Typescript tests (spec.{ts|tsx})...
     files: '*.spec.+(ts|tsx)'
     extends:
       - 'eslint:recommended'
@@ -159,7 +159,7 @@ overrides:
         - 'warn'
         - max: 10
       jest/no-hooks: 'off' # Enable usage of `beforeEach`, `afterEach` etc.
-  -  # Raw js files...
+  - # Raw js files...
     files: '**/*.js'
     parser: '@babel/eslint-parser'
     extends:
@@ -182,22 +182,21 @@ overrides:
       semi:
         - 'warn'
         - 'always'
-  -  # json files (@see https://www.npmjs.com/package/eslint-plugin-json)...
+  - # json files (@see https://www.npmjs.com/package/eslint-plugin-json)...
     files: '**/*.json'
     extends:
       - 'plugin:json/recommended'
     rules:
       prettier/prettier: 'warn'
-  -  # jsonc files - commented json (@see https://www.npmjs.com/package/eslint-plugin-jsonc)...
+  - # jsonc files - commented json (@see https://www.npmjs.com/package/eslint-plugin-jsonc)...
     files: '**/*.jsonc'
     extends:
       - 'plugin:jsonc/recommended-with-jsonc'
     rules:
       prettier/prettier: 'warn'
-  -  # yaml files - commented json (@see https://www.npmjs.com/package/eslint-plugin-yaml)...
+  - # yaml files - commented json (@see https://www.npmjs.com/package/eslint-plugin-yaml)...
     files: '**/*.+(yml|yaml)'
     extends:
       - 'plugin:yaml/recommended'
     rules:
       prettier/prettier: 'warn'
-

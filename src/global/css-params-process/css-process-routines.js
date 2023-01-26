@@ -94,9 +94,7 @@ function makeScssMap(mapId, data) {
     }
     mapParts.push('"' + id + '": ' + quoted);
   });
-  return (
-    '$' + mapId + ': ( ' + mapParts.join(', ') + ' );\n'
-  );
+  return '$' + mapId + ': ( ' + mapParts.join(', ') + ' );\n';
 }
 /** Make plain scss config file (with lines like `$id: value;`)
  * @param {object} cssConfig
@@ -110,8 +108,7 @@ function makeScssConfig(cssConfig, initialString) {
       if (value != null) {
         if (Array.isArray(value)) {
           result += value.map(makeScssConfig).join();
-        }
-        else if (valType === 'object') {
+        } else if (valType === 'object') {
           result += makeScssMap(id, value);
         } else {
           result += '$' + id + ': ' + value + ';\n';

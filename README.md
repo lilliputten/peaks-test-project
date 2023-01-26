@@ -37,4 +37,3 @@ npm script command `postinstall-publish-submodule`).
 ```
 npm run build-and-publish
 ```
-
