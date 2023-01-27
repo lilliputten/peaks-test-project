@@ -10,9 +10,8 @@ import { TReactContent } from '@/utils/react-types';
 import classnames from 'classnames';
 import { THtmlHeaderProps } from '@/layout/HtmlHeader/HtmlHeader';
 import HtmlHeader from '@/layout/HtmlHeader';
-// import NavBar from '@/components/NavBar';
+import NavBar from '@/components/NavBar';
 // import FooterWithContacts from '@/components/FooterWithContacts';
-// import TopCarousel from '@/components/TopCarousel';
 
 import styles from './GenericPageLayout.module.scss';
 
@@ -20,16 +19,14 @@ export interface TGenericPageLayoutProps extends THtmlHeaderProps {
   children?: TReactContent;
 }
 
-const GenericPageLayout = (props: TGenericPageLayoutProps): JSX.Element => {
+export default function GenericPageLayout(props: TGenericPageLayoutProps): JSX.Element {
   // NOTE: Get props from nextjs (as `pageProps`)
   const { children, ...restProps } = props;
   // prettier-ignore
   return (
     <div className={classnames(styles.root)}>
       <HtmlHeader {...restProps} />
-      {/*
-      <NavBar key="NavBar" showTopSplash={showTopSplash} />
-      */}
+      <NavBar key="NavBar" />
       <div className={styles.MainContainer}>
         {children}
       </div>
@@ -38,6 +35,4 @@ const GenericPageLayout = (props: TGenericPageLayoutProps): JSX.Element => {
       */}
     </div>
   );
-};
-
-export default GenericPageLayout;
+}

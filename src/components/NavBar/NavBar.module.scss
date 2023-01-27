@@ -1,0 +1,29 @@
+/** @module NavBar.module.scss
+ *  @since 2023.01.27, 16:20
+ *  @changed 2023.01.27, 16:20
+ */
+
+.container {
+  background-color: $primaryColor;
+}
+
+.box {
+  margin: 0 $itemPaddingPx;
+}
+
+.logoBox {
+  width: 130px;
+  height: 100px;
+  background-image: url('/images/assets/Logo_White.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.searchBox {
+  flex: 1; // Full width
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+}

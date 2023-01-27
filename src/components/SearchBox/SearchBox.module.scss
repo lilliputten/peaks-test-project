@@ -1,0 +1,20 @@
+/** @module SearchBox.module.scss
+ *  @since 2023.01.27, 17:33
+ *  @changed 2023.01.27, 17:44
+ */
+
+.container {
+  width: 90px;
+  border-bottom: 2px solid #fff;
+}
+
+.icon {
+  margin: 10px auto;
+  width: 18px;
+  height: 18px;
+  background-image: url('/images/assets/search-icon@2x.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
