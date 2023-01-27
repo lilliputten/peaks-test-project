@@ -10,9 +10,9 @@ import { TReactContent } from '@/utils/react-types';
 import classnames from 'classnames';
 import { THtmlHeaderProps } from '@/layout/HtmlHeader/HtmlHeader';
 import HtmlHeader from '@/layout/HtmlHeader';
-import PageHeader from '@/components/PageHeader';
-import PageFooter from '@/components/PageFooter';
-import PageContent from '@/components/PageContent';
+import PageHeader from '@/layout-components/PageHeader';
+import PageFooter from '@/layout-components/PageFooter';
+import PageContent from '@/layout-components/PageContent';
 
 import styles from './GenericPageLayout.module.scss';
 

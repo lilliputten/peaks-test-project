@@ -73,7 +73,7 @@
     "publish": "echo --Publish build (posix commands used)-- && sh ./utils/publish.sh",
     "serve-build": "echo --Serve build (at alternate port 3001)-- && serve build -l 3001",
     "serve-php-tests": "echo --Start php server for tests folder-- && php -S localhost:8080 -t tests",
-    "dev": "echo --Run development server-- && cross-env NEXT_PUBLIC_DEV=DEVSERVER next dev",
+    "start": "echo --Run development server-- && cross-env NEXT_PUBLIC_DEV=DEVSERVER next dev",
     "next-build": "echo --Make build-- && next build",
     "next-export": "echo --Export build-- && next export -o build",
     "build": "echo --Make build and export package-- && npm-run-all next-build next-export",

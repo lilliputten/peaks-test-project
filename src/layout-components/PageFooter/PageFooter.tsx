@@ -7,7 +7,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import Panel from '@/components/Panel';
+import Panel from '@/ui-elements/Panel';
 
 import styles from './PageFooter.module.scss';
 

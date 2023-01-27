@@ -20,7 +20,7 @@ npm i
 Start dev server (locate in browser with `http://localhost:3000`):
 
 ```
-npm run dev
+npm run start
 ```
 
 ## Make build
@@ -33,6 +33,12 @@ npm run build
 
 For success publishing the deploy environment should be propeply set up (see
 npm script command `postinstall-publish-submodule`).
+
+```
+npm run build-and-publish
+```
+
+To just publish previously created build:
 
 ```
 npm run build-and-publish

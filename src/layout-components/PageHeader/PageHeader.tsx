@@ -7,8 +7,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import Panel from '@/components/Panel';
-import SearchBox from '@/components/SearchBox';
+import Panel from '@/ui-elements/Panel';
+import HeaderSearchBox from '@/ui-elements/HeaderSearchBox';
 
 import styles from './PageHeader.module.scss';
 
@@ -28,7 +28,7 @@ export default function PageHeader(props: TPageHeaderProps): JSX.Element {
     >
       <div className={classnames(styles.box, styles.logoBox)} />
       <div className={classnames(styles.box, styles.searchBox)}>
-        <SearchBox />
+        <HeaderSearchBox />
       </div>
     </Panel>
   );
