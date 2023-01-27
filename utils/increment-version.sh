@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Increment version number
-# @changed 2023.01.26, 16:43
+# @changed 2023.01.27, 18:00
 
 # Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
 test -f "./utils/config.sh" && . "./utils/config.sh"
@@ -28,8 +28,6 @@ fi
 # Increment patch number
 NEXT_PATCH_NUMBER=`expr $PATCH_NUMBER + 1`
 
-# echo "Increment patch number ($PATCH_NUMBER -> $NEXT_PATCH_NUMBER)"
-
 cp "$VERSION_FILE" "$BACKUP" \
   && cat "$BACKUP" \
     | sed "s/^\(.*\)\.\([0-9]\+\)$/\1.$NEXT_PATCH_NUMBER/" \
@@ -38,10 +36,4 @@ cp "$VERSION_FILE" "$BACKUP" \
   && echo "Updated version: `cat $VERSION_FILE`" \
   && sh "./utils/update-build-variables.sh" \
   && VERSION=`cat "$VERSION_FILE"` \
-  && echo "Don't forget to update version for target project dependency (package.json, WebUiCore entry)"
-
-  # UNUSED
-  # && echo "Create version tag ($VERSION) in dist repository ($PUBLISH_FOLDER)" \
-  # && cd "$PUBLISH_FOLDER" \
-  # && git tag "v$VERSION" \
-
+  && echo "Done"
