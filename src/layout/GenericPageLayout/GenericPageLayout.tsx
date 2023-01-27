@@ -10,29 +10,30 @@ import { TReactContent } from '@/utils/react-types';
 import classnames from 'classnames';
 import { THtmlHeaderProps } from '@/layout/HtmlHeader/HtmlHeader';
 import HtmlHeader from '@/layout/HtmlHeader';
-import NavBar from '@/components/NavBar';
-// import FooterWithContacts from '@/components/FooterWithContacts';
+import PageHeader from '@/components/PageHeader';
+import PageFooter from '@/components/PageFooter';
+import PageContent from '@/components/PageContent';
 
 import styles from './GenericPageLayout.module.scss';
 
 export interface TGenericPageLayoutProps extends THtmlHeaderProps {
+  className?: string;
   children?: TReactContent;
+  rootPage?: boolean;
 }
 
 export default function GenericPageLayout(props: TGenericPageLayoutProps): JSX.Element {
   // NOTE: Get props from nextjs (as `pageProps`)
-  const { children, ...restProps } = props;
+  const { className, children, rootPage, ...restProps } = props;
   // prettier-ignore
   return (
-    <div className={classnames(styles.root)}>
+    <div className={classnames(className, styles.container, rootPage && styles.containerRoot)}>
       <HtmlHeader {...restProps} />
-      <NavBar key="NavBar" />
-      <div className={styles.MainContainer}>
+      <PageHeader rootPage={rootPage} />
+      <PageContent className={styles.content} rootPage={rootPage}>
         {children}
-      </div>
-      {/*
-      <FooterWithContacts />
-      */}
+      </PageContent>
+      <PageFooter rootPage={rootPage} />
     </div>
   );
 }

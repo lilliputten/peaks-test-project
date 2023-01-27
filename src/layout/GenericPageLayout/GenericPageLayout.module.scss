@@ -3,9 +3,18 @@
  *  @changed 2023.01.26, 23:51
  */
 
-.root,
-.MainContainer,
+.container,
+.mainContainer,
+.containerRoot,
 .DEBUG {
   /*!KEEP*/
-  // border: 2px solid purple;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
 }

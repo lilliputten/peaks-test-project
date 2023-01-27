@@ -1,7 +1,11 @@
-/** @module NavBar.module.scss
+/** @module PageHeader.module.scss
  *  @since 2023.01.27, 16:20
  *  @changed 2023.01.27, 16:20
  */
+
+.rootPage {
+  /*!KEEP*/
+}
 
 .container {
   background-color: $primaryColor;
@@ -12,8 +16,9 @@
 }
 
 .logoBox {
-  width: 130px;
-  height: 100px;
+  margin: $itemPaddingPx $blockPaddingPx;
+  width: 130px; // Logo size by width
+  height: 100px; // Determine entire header height (+ 2 * $itemPaddingPx)
   background-image: url('/images/assets/Logo_White.png');
   background-position: center;
   background-repeat: no-repeat;

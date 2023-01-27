@@ -1,4 +1,4 @@
-/** @module NavBar
+/** @module PageHeader
  *  @desc Top page header with logo, menu, hot actions etc.
  *  @since 2023.01.27, 16:20
  *  @changed 2023.01.27, 16:20
@@ -10,18 +10,22 @@ import classnames from 'classnames';
 import Panel from '@/components/Panel';
 import SearchBox from '@/components/SearchBox';
 
-import styles from './NavBar.module.scss';
+import styles from './PageHeader.module.scss';
 
-interface TNavBarProps {
+interface TPageHeaderProps {
   className?: string;
-  isRootPage?: boolean;
+  rootPage?: boolean;
 }
 
-export default function NavBar(props: TNavBarProps): JSX.Element {
-  const { className, isRootPage } = props;
-  // TODO: Make a link from logo if not root page.
+export default function PageHeader(props: TPageHeaderProps): JSX.Element {
+  const { className, rootPage } = props;
+  // TODO: Make a link from logo if not rootPage page.
   return (
-    <Panel className={classnames(className, styles.container, isRootPage && styles.rootPage)} flex>
+    <Panel
+      className={classnames(className, styles.container, rootPage && styles.rootPage)}
+      tag="header"
+      flex
+    >
       <div className={classnames(styles.box, styles.logoBox)} />
       <div className={classnames(styles.box, styles.searchBox)}>
         <SearchBox />
