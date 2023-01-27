@@ -8,3 +8,6 @@ coverage
 .dependencygraph
 .next
 package-lock.*
+
+# Generated
+/src/global/css-params-generated.*

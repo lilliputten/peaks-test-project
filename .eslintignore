@@ -23,6 +23,9 @@ yarn-error.log*
 /.history
 /.dependencygraph
 
+# Generated
+/src/global/css-params-generated.*
+
 # Temp & hidden files
 /temp
 **/*_{BACKUP,BASE,LOCAL,REMOTE}_*

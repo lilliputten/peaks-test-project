@@ -6,6 +6,4 @@
 // NOTE: Does nextjs already includes required polyfills?
 // import './polyfills'
 
-// TODO: Global styles
-
 export {}; // Calm tsserver for empty module

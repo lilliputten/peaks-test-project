@@ -4,7 +4,7 @@
  */
 
 export const titleDelim = ' — ';
-export const siteUrl = 'https://http://peaks.lilliputten.ru//';
+export const siteUrl = 'https://peaks.lilliputten.ru/';
 export const title = 'Peaks';
 export const descr = 'Peaks demo site';
 export const keywords = ['peaks', 'react', 'demo'];
