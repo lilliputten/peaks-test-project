@@ -11,6 +11,7 @@ import Spinner, { TSpinnerSize, TSpinnerColor } from '@/ui-elements/Spinner';
 import styles from './LoaderSplash.module.scss';
 
 type TBackground = true | 'white' | 'gray' | 'neutral' | 'primary';
+type TMode = 'cover';
 
 interface TLoaderSplashProps {
   className?: string;
@@ -19,19 +20,20 @@ interface TLoaderSplashProps {
   fullSize?: boolean;
   bg?: TBackground;
   show?: boolean;
+  mode?: TMode;
 }
 
 export default function LoaderSplash(props: TLoaderSplashProps): JSX.Element {
-  const { className, spinnerSize, spinnerColor, fullSize, bg, show = true } = props;
+  const { className, spinnerSize, spinnerColor, fullSize, bg, show = true, mode } = props;
   const bgId = bg && ['bg', bg].filter((x) => typeof x === 'string').join('_');
   const resultedClassName = classnames(
     className,
     styles.container,
+    mode && styles['mode_' + mode],
     fullSize && styles.fullSize,
     bgId && styles[bgId],
     show || styles.hidden,
   );
-  console.log('ZZZ', spinnerColor);
   return (
     <div className={resultedClassName}>
       <Spinner className={styles.spinner} size={spinnerSize} color={spinnerColor} />

@@ -5,6 +5,7 @@
 
 .rootPage {
   /*!KEEP*/
+  // TODO?
 }
 
 .container {
@@ -12,13 +13,12 @@
 }
 
 .box {
-  margin: 0 $itemPaddingPx;
+  margin: 0 $blockPaddingPx;
 }
 
 .logoBox {
-  margin: $itemPaddingPx $blockPaddingPx;
   width: 130px; // Logo size by width
-  height: 100px; // Determine entire header height (+ 2 * $itemPaddingPx)
+  height: 100px; // Determine entire header height (+ 2 * {box-v-padding})
   background-image: url('/images/assets/Logo_White.png');
   background-position: center;
   background-repeat: no-repeat;

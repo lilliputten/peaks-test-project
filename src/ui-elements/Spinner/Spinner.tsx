@@ -27,6 +27,5 @@ export default function Spinner(props: TSpinnerProps): JSX.Element {
     sizeId && styles[sizeId],
     colorId && styles[colorId],
   );
-  console.log('ZZZ', { color, colorId, resultedClassName });
   return <div className={resultedClassName} />;
 }

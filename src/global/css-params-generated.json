@@ -218,5 +218,7 @@
   "transitionTime": 250,
   "transitionTimeMs": "250ms",
   "animationTime": 500,
-  "animationTimeMs": "500ms"
+  "animationTimeMs": "500ms",
+  "disappearTime": 1000,
+  "disappearTimeMs": "1000ms"
 }

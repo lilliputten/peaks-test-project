@@ -18,13 +18,21 @@ export default function NewsList(props: TNewsListProps): JSX.Element {
   const { className } = props;
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    setLoading(false);
+    setTimeout(() => setLoading(false), 1000);
   }, []);
   const loaded = !loading;
   return (
     <div className={classnames(className, styles.container)}>
       {loaded && <div>Loaded</div>}
-      <LoaderSplash spinnerSize="large" bg="white" show={loading} fullSize />
+      <LoaderSplash
+        spinnerSize="large"
+        bg="white"
+        // bg="primary"
+        // spinnerColor="white"
+        mode="cover"
+        show={loading}
+        fullSize
+      />
     </div>
   );
 }

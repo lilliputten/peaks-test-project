@@ -192,6 +192,7 @@ const cssConfig = {
 
   transitionTime: defaultTransitionTime, // ms
   animationTime: defaultAnimationTime, // ms
+  disappearTime: 1000, // ms
 };
 
 module.exports = cssConfig;
