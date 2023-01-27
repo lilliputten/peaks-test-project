@@ -11,13 +11,13 @@ const theme = {}; // require(process.env.THEME_FILE);
 
 // Some reusable parameters...
 const defaultFontSize = theme.defaultFontSize || 16;
-const textColor = theme.textColor || '#444';
+const textColor = theme.textColor || '#000';
 
 const defaultTransitionTime = 250;
 const defaultAnimationTime = 500;
 
-const primaryColor = theme.primaryColor || '#ba163f' || '#07f';
-const secondaryColor = theme.secondaryColor || '#ffa550' || '#07f';
+const primaryColor = theme.primaryColor || '#09357B';
+const secondaryColor = theme.secondaryColor || '#ffa550'; // UNUSED
 
 const errorColor = theme.errorColor || '#c33';
 const dangerColor = theme.dangerColor || '#c33';
@@ -63,14 +63,13 @@ const breakpointsPre = Object.entries(breakpoints).reduce((result, [id, val]) =>
   }
   return result;
 }, {});
-const breakpointsPx = Object.entries(breakpoints).reduce(
-  (result, [id, px]) => ({ ...result, [id]: px + 'px' }),
-  {},
-);
-const breakpointsPrePx = Object.entries(breakpointsPre).reduce(
-  (result, [id, px]) => ({ ...result, [id]: px + 'px' }),
-  {},
-);
+function makePx(result, [id, px]) {
+  return { ...result, [id]: px + 'px' };
+}
+const breakpointsPx = Object.entries(breakpoints).reduce(makePx, {});
+const breakpointsPrePx = Object.entries(breakpointsPre).reduce(makePx, {});
+
+const wrapperMaxWidth = breakpoints.xl;
 
 // module.exports = { // Common-used css variables...
 const cssConfig = {
@@ -179,6 +178,8 @@ const cssConfig = {
   breakpointsPre,
   breakpointsPx,
   breakpointsPrePx,
+
+  wrapperMaxWidth,
 
   // Spacings & paddings...
 
