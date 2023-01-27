@@ -87,7 +87,7 @@ fs.writeFileSync(
 // console.log('Generated', scssGeneratedConfigFile);
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false, // NOTE: Debug only? It causes double rendering and hooks calling.
   images: {
     unoptimized: true,
     disableStaticImages: true,

@@ -51,6 +51,7 @@ overrides:
         - endOfLine: 'auto'
       import/no-namespace: 'off'
       no-unused-vars: 'off'
+      '@typescript-eslint/no-inferrable-types': 'warn'
       '@typescript-eslint/explicit-member-accessibility':
         - 'error'
         - accessibility: 'no-public'

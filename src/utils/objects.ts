@@ -374,6 +374,10 @@ export function safeStringify(
   }
 }
 
+export function niceStringify(data: unknown): string {
+  return safeStringify(data, undefined, undefined, undefined, undefined, true);
+}
+
 interface DeepData {
   a: number | { b: number };
 }
