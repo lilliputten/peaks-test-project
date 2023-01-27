@@ -15,12 +15,12 @@ export default function Document(): JSX.Element {
     title,
     descr,
     keywords,
-    opImageUrl,
-    opImageWidth,
-    opImageHeight,
-    faviconUrl,
-    faviconPngUrl,
-    faviconSvgUrl,
+    // opImageUrl,
+    // opImageWidth,
+    // opImageHeight,
+    // faviconUrl,
+    // faviconPngUrl,
+    // faviconSvgUrl,
   } = siteConfig;
   const { buildTag } = buildConfig;
   // @see https://developers.facebook.com/docs/sharing/webmasters
@@ -29,9 +29,11 @@ export default function Document(): JSX.Element {
     <Html lang="en">
       <Head>
         <noscript dangerouslySetInnerHTML={{ __html: `<!-- @build ${buildTag} -->` }} />
+        {/*
         <link rel="icon" type="image/svg+xml" href={faviconSvgUrl} />
         <link rel="icon" type="image/png" href={faviconPngUrl} />
         <link rel="icon" type="image/x-icon" href={faviconUrl} />
+        */}
         <meta name="title" content={title} />
         <meta name="description" content={descr} />
         <meta name="keywords" content={Array.isArray(keywords) ? keywords.join(', ') : keywords} />
@@ -39,9 +41,11 @@ export default function Document(): JSX.Element {
         <meta name="og:url" content={siteUrl} />
         <meta name="og:title" content={title} />
         <meta name="og:description" content={descr} />
+        {/*
         <meta name="og:image" content={opImageUrl} />
         <meta name="og:image:width" content={String(opImageWidth)} />
         <meta name="og:image:height" content={String(opImageHeight)} />
+        */}
       </Head>
       <body>
         <Main />
