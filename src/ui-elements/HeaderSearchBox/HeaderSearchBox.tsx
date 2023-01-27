@@ -1,5 +1,4 @@
 /** @module HeaderSearchBox
- *  @desc Top page header with logo, menu, hot actions etc.
  *  @since 2023.01.27, 17:33
  *  @changed 2023.01.27, 17:44
  */

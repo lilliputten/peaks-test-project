@@ -1,5 +1,4 @@
 /** @module PageContent
- *  @desc Top page header with logo, menu, hot actions etc.
  *  @since 2023.01.27, 16:20
  *  @changed 2023.01.27, 19:13
  */
@@ -21,7 +20,11 @@ interface TPageContentProps {
 export default function PageContent(props: TPageContentProps): JSX.Element {
   const { children, className, rootPage } = props;
   return (
-    <Panel className={classnames(className, styles.container, rootPage && styles.rootPage)} flex>
+    <Panel
+      className={classnames(className, styles.container, rootPage && styles.rootPage)}
+      tag="section"
+      flex
+    >
       {children}
     </Panel>
   );
