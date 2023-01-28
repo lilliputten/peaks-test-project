@@ -1,7 +1,17 @@
 /** @module types
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.28, 20:29
+ *  @changed 2023.01.28, 23:47
  */
+
+export interface ArticlesState {
+  query: string;
+  sortMode: TSortMode;
+  pageNo: number;
+  pageSize: number;
+  articles: TArticle[];
+  isLoading: boolean;
+  error?: Error;
+}
 
 /* // Info:
  * @see https://open-platform.theguardian.com/documentation/search
@@ -97,12 +107,13 @@ export type TArticle = TRawArticle & TRawArticleFields;
 export const sortModeIds = [
   'newest',
   'oldest',
-  // 'relevance',
+  // 'relevance', // UNUSED!
 ] as const;
 // Sort mode type (from ids list)
 export type TSortMode = (typeof sortModeIds)[number];
 
 export interface TArticleSearchInfo {
+  // NOTE: Indices start with 1, not 0!
   status: string; // 'ok',
   userTier: string; // 'developer',
   total: number; // 1,
@@ -121,11 +132,6 @@ export interface TArticleSearchQueryResult {
   response: TArticleSearchQueryResponse;
 }
 
-/* interface TSearchResult {
- *   info: TArticleSearchInfo;
- *   results: TRawArticle[];
- * }
- */
 export interface TArticleSearchResult {
   info: TArticleSearchInfo;
   articles: TArticle[];

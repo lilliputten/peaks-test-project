@@ -5,6 +5,7 @@
 
 import { TArticle, TRawArticle } from './types';
 
+/** Inject optional fields into main data object */
 export function combineArticleData(item: TRawArticle): TArticle {
   const { fields, ...basicData } = item;
   return { ...basicData, ...fields };

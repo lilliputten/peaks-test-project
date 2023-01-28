@@ -1,8 +1,10 @@
 /** @module strings
  *  @description Strings utilities
  *  @since 2023.01.26, 20:43
- *  @changed 2023.01.26, 20:43
+ *  @changed 2023.01.29, 00:43
  */
+
+import { AxiosError } from 'axios';
 
 import { defaultQuote } from '@/config/constants';
 
@@ -179,4 +181,21 @@ export function safeEscape(
     str = quote + str + quote;
   }
   return str;
+}
+
+export function errorToString(error: Error | AxiosError): string {
+  const metaError = error as Error & AxiosError;
+  /* // Error sample (AxiosError):
+   * code: "ERR_NETWORK"
+   * message: "Network Error"
+   * name: "AxiosError"
+   * stack: "AxiosError: Network Error\n    at XMLHttpRequest.handleError (webpack-internal:///./node_modules/axios/lib/adapters/xhr.js:168:14)"
+   */
+  const {
+    code,
+    message,
+    name,
+    // stack
+  } = metaError;
+  return [name, code, message].filter(Boolean).join(': ');
 }

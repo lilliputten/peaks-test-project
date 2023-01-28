@@ -1,16 +1,17 @@
 /** @module app-reducer
  *  @since 2023.01.28, 21:01
- *  @changed 2023.01.28, 21:01
+ *  @changed 2023.01.28, 23:47
  */
 
 import { combineReducers } from 'redux';
 import { shallowEqual, TypedUseSelectorHook, useSelector } from 'react-redux';
 
-import articlesReducer, {
-  ArticlesState,
+import { ArticlesState } from '@/features/articles';
+import {
+  articlesReducer,
   selectLoading,
+  selectError,
   selectArticles,
-  selectArticlesList,
 } from '@/features/articles/reducer';
 
 export const rootReducer = combineReducers({
@@ -26,8 +27,7 @@ export const useTypedSelector: TypedUseSelectorHook<RootState> = (selector) =>
 export const selectArticlesState = (state: RootState): ArticlesState => state.articles;
 export const useArticlesState = (): ArticlesState =>
   useTypedSelector((state) => selectArticlesState(state));
-export const useLoading = (): boolean => selectLoading(useArticlesState());
+export const useLoading = (): ReturnType<typeof selectLoading> => selectLoading(useArticlesState());
+export const useError = (): ReturnType<typeof selectError> => selectError(useArticlesState());
 export const useArticles = (): ReturnType<typeof selectArticles> =>
   selectArticles(useArticlesState());
-export const useArticlesList = (): ReturnType<typeof selectArticlesList> =>
-  selectArticlesList(useArticlesState());

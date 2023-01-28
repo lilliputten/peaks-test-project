@@ -66,6 +66,7 @@ export async function fetchArticles(
      */
     return resultData;
   } catch (error) {
+    // NOTE: Error type is AxiosError.
     // eslint-disable-next-line no-console
     console.error('[Search:fetchArticles]: request catch', {
       error,
@@ -73,8 +74,9 @@ export async function fetchArticles(
       params,
       srcParams,
     });
-    // eslint-disable-next-line no-debugger
-    debugger;
+    // debugger; // eslint-disable-line no-debugger
+    // TODO: Extend error with request parameters (url, params, srcParams, etc)?
+    // TODO: Use our own error class, extending AxiosError?
     throw error;
   }
 }

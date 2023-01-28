@@ -3,7 +3,8 @@
  *  @changed 2023.01.28, 20:29
  */
 
-import { TShowFieldsList } from './types';
+import * as buildConfig from '@/config/build';
+import { sortModeIds, TShowFieldsList } from './types';
 
 /* // Info:
  * @see https://open-platform.theguardian.com/documentation/search
@@ -19,7 +20,7 @@ import { TShowFieldsList } from './types';
  * - order-by=relevance
  */
 
-// Default options list for `show-fields` parameter:
+// Default options list for `show-fields` parameter (unused items are commented out):
 const defaultFieldsList: TShowFieldsList = [
   // 'all', // Includes all the fields
   // 'allowUgc', // May have associated User Generated Content. This typically means the content has an associated Guardian Witness assignment which can be accessed by querying show-references=witness-assignment -- String (Boolean)
@@ -45,5 +46,12 @@ const defaultFieldsList: TShowFieldsList = [
   'trailText', // String (HTML)
   // 'wordcount', // String (Integer)
 ];
-// Plain optiions list string
+
+// Plain options list string
 export const defaultFieldsString = defaultFieldsList.join(',');
+
+// Sort modes
+export const defaultSortMode = sortModeIds[0];
+
+// Pages
+export const defaultPageSize = buildConfig.DEBUG ? 5 : 20;

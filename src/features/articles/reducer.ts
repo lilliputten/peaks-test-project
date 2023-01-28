@@ -1,110 +1,99 @@
 /** @module reducer
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.28, 20:29
+ *  @changed 2023.01.29, 00:44
  */
 
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { fetchArticles } from './service';
-import { TArticleId, TArticle, TArticleSearchResult } from './types';
-
-export interface ArticlesState {
-  ids: TArticleId[];
-  articles: Record<TArticleId, TArticle>;
-  articlesList: TArticle[];
-  isLoading: boolean;
-  error: string | undefined;
-}
+import { TArticle, TArticleSearchResult, TSortMode, ArticlesState } from './types';
+import { defaultPageSize, defaultSortMode } from './constants';
+import { fetchArticlesThunk } from './thunks';
 
 const initialState: ArticlesState = {
-  /* // TODO:
-   * sortMode: TSortMode;
-   * pageNo: number;
-   * pageSize: number;
-   */
-  ids: [],
-  articles: Object.create(null),
-  articlesList: [],
+  query: 'Gunther Millions',
+  sortMode: defaultSortMode,
+  pageNo: 1,
+  pageSize: defaultPageSize,
+  articles: [],
   isLoading: false,
   error: undefined,
 };
 
-const articlesAdapter = {
-  setAll(state: ArticlesState, articles: TArticle[]) {
-    state.ids = [];
-    state.articles = Object.create(null);
-    state.articlesList = [];
-    this.addMany(state, articles);
-  },
-  addMany(state: ArticlesState, articles: TArticle[]): void {
-    articles.forEach((article) => {
-      const { id } = article;
-      state.articles[id] = article;
-      state.articlesList.push(article);
-      state.ids.push(id);
-    });
-  },
-  addOne(state: ArticlesState, article: TArticle): void {
-    this.addMany(state, [article]);
-  },
-};
-
-const fetchArticlesThunk = createAsyncThunk(
-  'articles/fetchArticlesThunk',
-  async (): Promise<TArticleSearchResult> => {
-    const params = {}; // TODO: Create params from sortMode, pageNo, pageSize
-    return await fetchArticles(params);
-  },
-);
+type ArticlesPayloadAction = PayloadAction<TArticleSearchResult, string, unknown, Error>;
 
 const articlesSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
-    /* // TODO: setSortMode, setPageNo, setPageSize
-     * setSortMode: (
-     *   state,
-     *   action: PayloadAction<{ label: keyof Sorter; value: SortArticleValue }>,
-     * ) => {
-     *   state.sorter[action.payload.label] = action.payload.value;
-     * },
-     */
+    setSortMode: (state, action: PayloadAction<TSortMode>) => {
+      state.sortMode = action.payload;
+    },
+    setPageNo: (state, action: PayloadAction<number>) => {
+      state.pageNo = action.payload;
+    },
+    setPageSize: (state, action: PayloadAction<number>) => {
+      state.pageSize = action.payload;
+    },
   },
   extraReducers: {
-    [fetchArticlesThunk.pending.toString()]: (state: ArticlesState) => {
+    [String(fetchArticlesThunk.pending)]: (state: ArticlesState) => {
       state.isLoading = true;
       state.error = undefined;
     },
     [fetchArticlesThunk.fulfilled.toString()]: (
       state: ArticlesState,
-      action: PayloadAction<TArticleSearchResult>,
+      action: ArticlesPayloadAction,
     ) => {
       state.isLoading = false;
       state.error = undefined;
-      const { articles } = action.payload;
-      // If received new articles...
-      if (articles.length !== state.ids.length || articles.some((n) => !(n.id in state.articles))) {
-        // ...Set all articles into state...
-        articlesAdapter.setAll(state, articles);
+      const { payload } = action;
+      const { info, articles } = payload;
+      /* // Info data sample (NOTE: Indices start with 1, not 0!):
+       * status: 'ok',
+       * userTier: 'developer',
+       * total: 2402038,
+       * startIndex: 1,
+       * pageSize: 5,
+       * currentPage: 1,
+       * pages: 480408,
+       * orderBy: 'newest'
+       */
+      const { startIndex } = info;
+      const start = startIndex - 1; // NOTE: Indices start with 1, not 0!
+      /* // DEBUG
+       * console.log('[features/articles/reducer:fetchArticlesThunk.fulfilled]', {
+       *   info,
+       *   articles,
+       *   // meta,
+       * });
+       */
+      const newArticles = [...state.articles];
+      for (let i = 0; i < articles.length; i++) {
+        newArticles[start + i] = articles[i];
       }
+      state.articles = newArticles;
     },
-    [fetchArticlesThunk.rejected.toString()]: (
+    [String(fetchArticlesThunk.rejected)]: (
       state: ArticlesState,
-      action: PayloadAction<string>,
+      action: ArticlesPayloadAction,
     ) => {
+      const { error, meta } = action;
+      // eslint-disable-next-line no-console
+      console.log('[features/articles/reducer:fetchArticlesThunk.rejected]', {
+        error,
+        meta,
+      });
+      debugger; // eslint-disable-line no-debugger
+      state.error = error;
       state.isLoading = false;
-      state.error = action.payload;
     },
   },
 });
 
-const selectIds = (state: ArticlesState): TArticleId[] => state.ids;
-const selectLoading = (state: ArticlesState): boolean => {
-  return state.isLoading;
-};
-const selectArticles = (state: ArticlesState): Record<TArticleId, TArticle> => state.articles;
-const selectArticlesList = (state: ArticlesState): TArticle[] => state.articlesList;
+const selectLoading = (state: ArticlesState): ArticlesState['isLoading'] => state.isLoading;
+const selectError = (state: ArticlesState): ArticlesState['error'] => state.error;
+const selectArticles = (state: ArticlesState): TArticle[] => state.articles;
 
-export { selectIds, selectLoading, selectArticles, selectArticlesList, fetchArticlesThunk };
+export { selectLoading, selectError, selectArticles };
 
-export default articlesSlice.reducer;
+export const articlesReducer = articlesSlice.reducer;

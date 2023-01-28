@@ -1,13 +1,18 @@
 /** @module ArticlesList.module.scss
  *  @since 2023.01.27, 19:57
- *  @changed 2023.01.27, 22:44
+ *  @changed 2023.01.29, 00:46
  */
 
 .container {
   flex: 1;
+  flex-direction: column;
   display: flex;
   position: relative;
   overflow: hidden;
+}
+
+.contentError {
+  color: $errorColor;
 }
 
 .contentContainer {
