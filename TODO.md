@@ -1,9 +1,7 @@
 <!--
-@changed 2023.01.26, 02:27
+@changed 2023.01.29, 02:26
 -->
 
 # TODO
 
-- 2023.01.26, 02:27 -- Add publish scripts, configure deploy server.
-- 2023.01.26, 02:24 -- Append other essential project settings.
-- 2023.01.26, 02:24 -- Start minmal project with modules, assests, style modules, basic api setup & mocks.
+- 2023.01.29, 02:25 -- Add search field, connect it to articles state, check data updating.
