@@ -3,13 +3,13 @@
  *  @changed 2023.01.28, 15:54
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import classnames from 'classnames';
-import axios from 'axios';
 
-import config from '@/config';
+// import config from '@/config';
 import { safeStringify } from '@/utils/objects';
 import LoaderSplash from '@/ui-elements/LoaderSplash';
+import { Search, TSearchCombinedItem } from '@/services/GuardianApis/Search';
 
 import styles from './NewsList.module.scss';
 
@@ -20,45 +20,39 @@ interface TNewsListProps {
 export default function NewsList(props: TNewsListProps): JSX.Element {
   const { className } = props;
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<any[]>([]); // ???
+  const searchService = useMemo(() => new Search(), []);
+  const [data, setData] = useState<TSearchCombinedItem[]>([]);
+  // TODO: Use store
+
   useEffect(() => {
-    const url = config.api.apiUrlPrefix + '/search';
-    const params = {
-      'api-key': config.api.apiKey,
-    };
+    const params = {};
     setLoading(true);
-    axios
-      .get(url, { params })
-      .then((res) => {
-        const { data } = res;
-        const { response } = data;
-        const { results, ...info } = response;
-        console.log('@:NewsList: request done', {
+    searchService
+      .querySearch(params)
+      .then(({ info, results }) => {
+        // DEBUG
+        console.log('[NewsList:useEffect]: request done', {
           results,
           info,
-          data,
-          url,
+          // data,
           params,
-          res,
         });
         debugger;
-        // setData(res);
-        setLoading(false);
+        setData(results);
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
-        console.error('@:NewsList: request catch', {
+        console.error('[NewsList:useEffect]: request catch', {
           error,
-          url,
         });
         // eslint-disable-next-line no-debugger
         debugger;
         throw error;
-        // setLoading(false);
         // TODO: setError?
         // TODO: Show toast...
-      });
-  }, []);
+      })
+      .finally(() => setLoading(false));
+  }, [searchService]);
   const loaded = !loading;
   const content = loaded && data && safeStringify(data);
   return (
