@@ -1,8 +1,24 @@
+/** @module _app
+ *  @desc Root application component
+ *  @since 2023.01.28, 21:01
+ *  @changed 2023.01.28, 22:06
+ */
+
 import { AppProps } from 'next/app';
+import { Provider } from 'react-redux';
 
 import '@/global/global-includes';
+import { store } from '@/app/app-store';
+import AppWrapper from '@/app/app-wrapper';
+
 import '@/global/styles.scss';
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      <AppWrapper>
+        <Component {...pageProps} />
+      </AppWrapper>
+    </Provider>
+  );
 }

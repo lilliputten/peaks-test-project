@@ -8,7 +8,7 @@ export const isBrowser = typeof window !== 'undefined'; // NOTE: `!!process.brow
 export const isLocalhost = isBrowser && window.location.host.startsWith('localhost');
 
 export const nodeEnv = process.env.nodeEnv;
-export const isTest = process.env.isTest;
+export const isTest = !!process.env.isTest;
 
 export const devMode = process.env.NEXT_PUBLIC_DEV;
 export const isDev = isTest || !!devMode;
