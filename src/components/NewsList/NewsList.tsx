@@ -1,15 +1,14 @@
 /** @module NewsList
  *  @since 2023.01.27, 19:57
- *  @changed 2023.01.28, 15:54
+ *  @changed 2023.01.28, 20:29
  */
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 
-// import config from '@/config';
 import { safeStringify } from '@/utils/objects';
 import LoaderSplash from '@/ui-elements/LoaderSplash';
-import { Search, TSearchCombinedItem } from '@/services/GuardianApis/Search';
+import { fetchArticles, TArticle } from '@/features/articles';
 
 import styles from './NewsList.module.scss';
 
@@ -20,25 +19,23 @@ interface TNewsListProps {
 export default function NewsList(props: TNewsListProps): JSX.Element {
   const { className } = props;
   const [loading, setLoading] = useState(true);
-  const searchService = useMemo(() => new Search(), []);
-  const [data, setData] = useState<TSearchCombinedItem[]>([]);
+  const [data, setData] = useState<TArticle[]>([]);
   // TODO: Use store
 
   useEffect(() => {
     const params = {};
     setLoading(true);
-    searchService
-      .querySearch(params)
-      .then(({ info, results }) => {
+    fetchArticles(params)
+      .then(({ info, articles }) => {
         // DEBUG
         console.log('[NewsList:useEffect]: request done', {
-          results,
+          articles,
           info,
           // data,
           params,
         });
         debugger;
-        setData(results);
+        setData(articles);
       })
       .catch((error) => {
         // eslint-disable-next-line no-console
@@ -52,7 +49,7 @@ export default function NewsList(props: TNewsListProps): JSX.Element {
         // TODO: Show toast...
       })
       .finally(() => setLoading(false));
-  }, [searchService]);
+  }, []);
   const loaded = !loading;
   const content = loaded && data && safeStringify(data);
   return (
