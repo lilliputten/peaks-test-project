@@ -5,12 +5,12 @@
 
 import { AnyAction, createAsyncThunk, Store, ThunkDispatch } from '@reduxjs/toolkit';
 
-import { TArticleSearchResult, ArticlesState } from './types';
+import { TArticleSearchResult, TArticlesState } from './types';
 import { fetchArticles } from './service';
 import { RootState } from '@/app/app-reducer';
 
 export type FetchArticlesThunkParams = Pick<
-  ArticlesState,
+  TArticlesState,
   'query' | 'sortMode' | 'pageNo' | 'pageSize'
 >;
 

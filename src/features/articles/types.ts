@@ -3,11 +3,18 @@
  *  @changed 2023.01.28, 23:47
  */
 
-export interface ArticlesState {
+export interface TArticlesParams {
   query: string;
   sortMode: TSortMode;
   pageNo: number;
   pageSize: number;
+}
+
+// Application-level parameters (will be translated to `TSearchQueryParams`):
+export interface TArticleSearchParams extends Partial<TArticlesParams> {
+  showFields?: TShowFieldsList;
+}
+export interface TArticlesState extends TArticlesParams {
   articles: TArticle[];
   isLoading: boolean;
   error?: Error;
@@ -144,13 +151,4 @@ export interface TSearchQueryParams {
   'order-by'?: TSortMode; // Returns results in the specified order  String  See list below. newest - Default in all other cases. oldest. relevance - Default where q parameter is specified.
   'show-fields'?: string; // Add fields associated with the content
   'api-key': string; // The API key used for the query
-}
-
-// Application-level parameters (will be translated to `TSearchQueryParams`):
-export interface TArticleSearchParams {
-  query?: string;
-  sortMode?: TSortMode;
-  pageNo?: number;
-  pageSize?: number;
-  showFields?: TShowFieldsList;
 }

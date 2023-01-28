@@ -1,23 +1,19 @@
 /** @module reducer
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.29, 00:44
+ *  @changed 2023.01.29, 02:16
  */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { TArticle, TArticleSearchResult, TSortMode, ArticlesState } from './types';
-import { defaultPageSize, defaultSortMode } from './constants';
+import {
+  TArticle,
+  TArticleSearchResult,
+  TSortMode,
+  TArticlesState,
+  TArticlesParams,
+} from './types';
+import { initialState, startPageNo } from './constants';
 import { fetchArticlesThunk } from './thunks';
-
-const initialState: ArticlesState = {
-  query: 'Gunther Millions',
-  sortMode: defaultSortMode,
-  pageNo: 1,
-  pageSize: defaultPageSize,
-  articles: [],
-  isLoading: false,
-  error: undefined,
-};
 
 type ArticlesPayloadAction = PayloadAction<TArticleSearchResult, string, unknown, Error>;
 
@@ -34,14 +30,19 @@ const articlesSlice = createSlice({
     setPageSize: (state, action: PayloadAction<number>) => {
       state.pageSize = action.payload;
     },
+    resetData: (state) => {
+      state.error = undefined;
+      state.articles = [];
+      state.pageNo = startPageNo; // ???
+    },
   },
   extraReducers: {
-    [String(fetchArticlesThunk.pending)]: (state: ArticlesState) => {
+    [String(fetchArticlesThunk.pending)]: (state: TArticlesState) => {
       state.isLoading = true;
       state.error = undefined;
     },
     [fetchArticlesThunk.fulfilled.toString()]: (
-      state: ArticlesState,
+      state: TArticlesState,
       action: ArticlesPayloadAction,
     ) => {
       state.isLoading = false;
@@ -74,7 +75,7 @@ const articlesSlice = createSlice({
       state.articles = newArticles;
     },
     [String(fetchArticlesThunk.rejected)]: (
-      state: ArticlesState,
+      state: TArticlesState,
       action: ArticlesPayloadAction,
     ) => {
       const { error, meta } = action;
@@ -90,10 +91,17 @@ const articlesSlice = createSlice({
   },
 });
 
-const selectLoading = (state: ArticlesState): ArticlesState['isLoading'] => state.isLoading;
-const selectError = (state: ArticlesState): ArticlesState['error'] => state.error;
-const selectArticles = (state: ArticlesState): TArticle[] => state.articles;
+const selectLoading = (state: TArticlesState): TArticlesState['isLoading'] => state.isLoading;
+const selectError = (state: TArticlesState): TArticlesState['error'] => state.error;
+const selectArticles = (state: TArticlesState): TArticle[] => state.articles;
+const selectParams = (state: TArticlesState): TArticlesParams => {
+  const { query, sortMode, pageNo, pageSize } = state;
+  return { query, sortMode, pageNo, pageSize };
+};
 
-export { selectLoading, selectError, selectArticles };
+// See reducers creation in `src/app/app-reducer.ts`
+export { selectLoading, selectError, selectArticles, selectParams };
+
+export const { setSortMode, setPageNo, setPageSize, resetData } = articlesSlice.actions;
 
 export const articlesReducer = articlesSlice.reducer;

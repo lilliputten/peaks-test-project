@@ -1,7 +1,7 @@
 /** @module strings
  *  @description Strings utilities
  *  @since 2023.01.26, 20:43
- *  @changed 2023.01.29, 00:43
+ *  @changed 2023.01.29, 02:16
  */
 
 import { AxiosError } from 'axios';

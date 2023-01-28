@@ -4,7 +4,7 @@
  */
 
 import * as buildConfig from '@/config/build';
-import { sortModeIds, TShowFieldsList } from './types';
+import { sortModeIds, TArticlesParams, TArticlesState, TShowFieldsList } from './types';
 
 /* // Info:
  * @see https://open-platform.theguardian.com/documentation/search
@@ -50,8 +50,25 @@ const defaultFieldsList: TShowFieldsList = [
 // Plain options list string
 export const defaultFieldsString = defaultFieldsList.join(',');
 
-// Sort modes
+// Default sort mode
 export const defaultSortMode = sortModeIds[0];
 
-// Pages
+// Pages per request
 export const defaultPageSize = buildConfig.DEBUG ? 5 : 20;
+export const startPageNo = 1;
+
+// Default parameters
+export const defaultParams: TArticlesParams = {
+  query: 'Gunther Millions',
+  sortMode: defaultSortMode,
+  pageNo: startPageNo,
+  pageSize: defaultPageSize,
+};
+
+// Default state
+export const initialState: TArticlesState = {
+  ...defaultParams,
+  articles: [],
+  isLoading: false,
+  error: undefined,
+};
