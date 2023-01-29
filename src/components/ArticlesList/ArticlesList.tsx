@@ -3,13 +3,13 @@
  *  @changed 2023.01.29, 22:32
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import classnames from 'classnames';
 
 import { useArticles, useLoading, useError } from '@/app/app-reducer';
-import { safeStringify } from '@/utils/objects';
-import { errorToString } from '@/utils/strings';
+import { errorToString } from '@/utils';
 import LoaderSplash from '@/ui-elements/LoaderSplash';
+import ArticlePreview from '@/components/ArticlePreview';
 
 import styles from './ArticlesList.module.scss';
 
@@ -35,12 +35,14 @@ export default function ArticlesList(props: TArticlesListProps): JSX.Element {
    * }, [articles]);
    */
 
-  const isLoaded = !isLoading;
-  const content = isLoaded && articles && safeStringify(articles);
+  const content = useMemo(() => {
+    return articles.map(({ id }) => <ArticlePreview key={id} id={id} />);
+  }, [articles]);
+
   return (
     <div className={classnames(className, styles.container)}>
-      {error && <div className={styles.contentError}>Error: {errorToString(error)}</div>}
-      {content && <div className={styles.contentContainer}>Loaded: {content}</div>}
+      {error && <div className={styles.contentError}>{errorToString(error)}</div>}
+      {content && <div className={styles.contentContainer}>{content}</div>}
       {/* Show small loader at the end of article items if some data has loaded */}
       {isLoading && !isEmpty && (
         <LoaderSplash

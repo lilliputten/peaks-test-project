@@ -1,20 +1,20 @@
 /** @module ArticlesControlNode
  *  @desc Bare component to cintrol articles events on the top level of react nodes
  *  @since 2023.01.29, 21:22
- *  @changed 2023.01.29, 21:37
+ *  @changed 2023.01.30, 00:35
  */
 
 import { useEffect, useMemo } from 'react';
 import { useStore } from 'react-redux';
 
 import { useAppDispatch } from '@/app/app-store';
-import { RootState } from '@/app/app-reducer';
-import { useParams } from '@/app/app-reducer';
-import { TArticlesParams, defaultParams, fetchArticlesAction } from '@/features/articles';
+import { useParams, RootState } from '@/app/app-reducer';
+import { defaultParams } from '@/features/articles/constants'; // NOTE: Temporaily trick: Avoiding cycling imports
+import { TArticlesParams, fetchArticlesAction } from '@/features/articles';
 import { resetData } from '@/features/articles/reducer';
 
 type TMemo = TArticlesParams;
-const defaultMemo = defaultParams;
+const defaultMemo = { ...defaultParams };
 
 export function ArticlesControlNode(): null {
   const dispatch = useAppDispatch();

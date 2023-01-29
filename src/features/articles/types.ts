@@ -15,6 +15,8 @@ export interface TArticleSearchParams extends Partial<TArticlesParams> {
   showFields?: TShowFieldsList;
 }
 export interface TArticlesState extends TArticlesParams {
+  ids: TArticleId[];
+  articlesHash: Record<TArticleId, TArticle>;
   articles: TArticle[];
   isLoading: boolean;
   error?: Error;

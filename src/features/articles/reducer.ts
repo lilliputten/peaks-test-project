@@ -1,6 +1,6 @@
 /** @module reducer
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.29, 02:16
+ *  @changed 2023.01.29, 23:23
  */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -11,6 +11,7 @@ import {
   TSortMode,
   TArticlesState,
   TArticlesParams,
+  TArticleId,
 } from './types';
 import { initialState, startPageNo } from './constants';
 import { fetchArticlesThunk } from './thunks';
@@ -32,7 +33,9 @@ const articlesSlice = createSlice({
     },
     resetData: (state) => {
       state.error = undefined;
+      state.ids = [];
       state.articles = [];
+      state.articlesHash = {};
       state.pageNo = startPageNo; // ???
     },
   },
@@ -68,11 +71,19 @@ const articlesSlice = createSlice({
        *   // meta,
        * });
        */
+      const newIds = [...state.ids];
       const newArticles = [...state.articles];
+      const newArticlesHash = { ...state.articlesHash };
       for (let i = 0; i < articles.length; i++) {
-        newArticles[start + i] = articles[i];
+        const article = articles[i];
+        const { id } = article;
+        newIds[start + i] = id;
+        newArticles[start + i] = article;
+        newArticlesHash[id] = article;
       }
+      state.ids = newIds;
       state.articles = newArticles;
+      state.articlesHash = newArticlesHash;
     },
     [String(fetchArticlesThunk.rejected)]: (
       state: TArticlesState,
@@ -93,14 +104,28 @@ const articlesSlice = createSlice({
 
 const selectLoading = (state: TArticlesState): TArticlesState['isLoading'] => state.isLoading;
 const selectError = (state: TArticlesState): TArticlesState['error'] => state.error;
+const selectArticleIds = (state: TArticlesState): TArticleId[] => state.ids;
 const selectArticles = (state: TArticlesState): TArticle[] => state.articles;
+const selectArticlesHash = (state: TArticlesState): Record<TArticleId, TArticle> =>
+  state.articlesHash;
+const selectArticle = (state: TArticlesState, id: TArticleId): TArticle | undefined =>
+  state.articlesHash[id];
 const selectParams = (state: TArticlesState): TArticlesParams => {
+  // TODO: To memoize params object?
   const { query, sortMode, pageNo, pageSize } = state;
   return { query, sortMode, pageNo, pageSize };
 };
 
 // See reducers creation in `src/app/app-reducer.ts`
-export { selectLoading, selectError, selectArticles, selectParams };
+export {
+  selectLoading,
+  selectError,
+  selectArticleIds,
+  selectArticles,
+  selectArticlesHash,
+  selectArticle,
+  selectParams,
+};
 
 export const { setSortMode, setPageNo, setPageSize, resetData } = articlesSlice.actions;
 

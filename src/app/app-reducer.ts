@@ -1,17 +1,19 @@
 /** @module app-reducer
  *  @since 2023.01.28, 21:01
- *  @changed 2023.01.29, 01:24
+ *  @changed 2023.01.29, 23:05
  */
 
 import { combineReducers } from 'redux';
 import { shallowEqual, TypedUseSelectorHook, useSelector } from 'react-redux';
 
-import { TArticlesState } from '@/features/articles';
+import { TArticleId, TArticlesState } from '@/features/articles';
 import {
   articlesReducer,
   selectLoading,
   selectError,
+  selectArticleIds,
   selectArticles,
+  selectArticle,
   selectParams,
 } from '@/features/articles/reducer';
 
@@ -30,6 +32,10 @@ export const useArticlesState = (): TArticlesState =>
   useTypedSelector((state) => selectArticlesState(state));
 export const useLoading = (): ReturnType<typeof selectLoading> => selectLoading(useArticlesState());
 export const useError = (): ReturnType<typeof selectError> => selectError(useArticlesState());
+export const useArticleIds = (): ReturnType<typeof selectArticleIds> =>
+  selectArticleIds(useArticlesState());
 export const useArticles = (): ReturnType<typeof selectArticles> =>
   selectArticles(useArticlesState());
+export const useArticle = (id: TArticleId): ReturnType<typeof selectArticle> =>
+  selectArticle(useArticlesState(), id);
 export const useParams = (): ReturnType<typeof selectParams> => selectParams(useArticlesState());

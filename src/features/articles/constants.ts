@@ -68,6 +68,8 @@ export const defaultParams: TArticlesParams = {
 // Default state
 export const initialState: TArticlesState = {
   ...defaultParams,
+  ids: [],
+  articlesHash: {},
   articles: [],
   isLoading: false,
   error: undefined,
