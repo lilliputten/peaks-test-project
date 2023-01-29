@@ -1,25 +1,17 @@
 /** @module ArticlesList
  *  @since 2023.01.27, 19:57
- *  @changed 2023.01.29, 02:15
+ *  @changed 2023.01.29, 22:32
  */
 
-import React, { useEffect, useMemo } from 'react';
-import { useStore } from 'react-redux';
+import React from 'react';
 import classnames from 'classnames';
 
-import { RootState } from '@/app/app-reducer';
-import { useAppDispatch } from '@/app/app-store';
-import { useArticles, useLoading, useError, useParams } from '@/app/app-reducer';
+import { useArticles, useLoading, useError } from '@/app/app-reducer';
 import { safeStringify } from '@/utils/objects';
 import { errorToString } from '@/utils/strings';
 import LoaderSplash from '@/ui-elements/LoaderSplash';
-import { TArticlesParams, defaultParams, fetchArticlesAction } from '@/features/articles';
-import { resetData } from '@/features/articles/reducer';
 
 import styles from './ArticlesList.module.scss';
-
-type TMemo = TArticlesParams;
-const defaultMemo = defaultParams;
 
 interface TArticlesListProps {
   className?: string;
@@ -28,61 +20,42 @@ interface TArticlesListProps {
 export default function ArticlesList(props: TArticlesListProps): JSX.Element {
   const { className } = props;
 
-  const dispatch = useAppDispatch();
-  const appStateStore = useStore<RootState>();
+  // TODO: Detect end-page scrolling and invoke next articles loading.
 
-  const articles = useArticles();
-  const loading = useLoading();
+  const isLoading = useLoading();
   const error = useError();
-  const { query, sortMode, pageNo, pageSize } = useParams();
+  const articles = useArticles();
+  const isEmpty = !articles.length;
 
-  const memo = useMemo<TMemo>(() => ({ ...defaultMemo }), []);
+  /* // DEBUG: articles
+   * useEffect(() => {
+   *   console.log('[ArticlesList]: DEBUG: articles', {
+   *     articles,
+   *   });
+   * }, [articles]);
+   */
 
-  // Effect: Update data on essential parameters change
-  useEffect(() => {
-    const needReset =
-      true || memo.query !== query || memo.sortMode !== sortMode || memo.pageSize !== pageSize;
-    console.log('[ArticlesList:Effect: Essential parameters]', {
-      needReset,
-      query,
-      sortMode,
-      pageNo,
-      pageSize,
-      memo,
-    });
-    debugger;
-    // Call actions...
-    if (needReset) {
-      dispatch(resetData());
-    }
-    fetchArticlesAction(appStateStore);
-    // Save parameters to memo
-    memo.query = query;
-    memo.sortMode = sortMode;
-    memo.pageNo = pageNo;
-    memo.pageSize = pageSize;
-  }, [dispatch, memo, query, sortMode, pageNo, pageSize]);
-
-  // DEBUG: articles
-  useEffect(() => {
-    console.log('DEBUG: articles', {
-      articles,
-    });
-  }, [articles]);
-
-  const loaded = !loading;
-  const content = loaded && articles && safeStringify(articles);
+  const isLoaded = !isLoading;
+  const content = isLoaded && articles && safeStringify(articles);
   return (
     <div className={classnames(className, styles.container)}>
       {error && <div className={styles.contentError}>Error: {errorToString(error)}</div>}
       {content && <div className={styles.contentContainer}>Loaded: {content}</div>}
+      {/* Show small loader at the end of article items if some data has loaded */}
+      {isLoading && !isEmpty && (
+        <LoaderSplash
+          className={styles.smallLoade}
+          spinnerSize="small"
+          show // Without animations!
+        />
+      )}
+      {/* Show large covering loader splash if no data loaded */}
       <LoaderSplash
+        className={styles.loaderSplash}
+        show={isLoading && isEmpty}
         spinnerSize="large"
         bg="white"
-        // bg="primary"
-        // spinnerColor="white"
         mode="cover"
-        show={loading}
         fullSize
       />
     </div>
