@@ -1,4 +1,4 @@
-/** @module app-store
+/** @module app-wrapper
  *  @since 2023.01.28, 21:01
  *  @changed 2023.01.29, 21:31
  */

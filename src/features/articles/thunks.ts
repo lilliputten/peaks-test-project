@@ -7,7 +7,7 @@ import { AnyAction, createAsyncThunk, Store, ThunkDispatch } from '@reduxjs/tool
 
 import { TArticleSearchResult, TArticlesState } from './types';
 import { fetchArticles } from './service';
-import { RootState } from '@/app/app-reducer';
+import { RootState } from '@/core/app-reducer';
 
 export type FetchArticlesThunkParams = Pick<
   TArticlesState,

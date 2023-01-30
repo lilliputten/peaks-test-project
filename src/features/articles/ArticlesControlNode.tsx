@@ -7,8 +7,8 @@
 import { useEffect, useMemo } from 'react';
 import { useStore } from 'react-redux';
 
-import { useAppDispatch } from '@/app/app-store';
-import { useParams, RootState } from '@/app/app-reducer';
+import { useAppDispatch } from '@/core/app-store';
+import { useParams, RootState } from '@/core/app-reducer';
 import { defaultParams } from '@/features/articles/constants'; // NOTE: Temporaily trick: Avoiding cycling imports
 import { TArticlesParams, fetchArticlesAction } from '@/features/articles';
 import { resetData } from '@/features/articles/reducer';

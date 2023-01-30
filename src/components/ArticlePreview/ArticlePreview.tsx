@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { TArticle, TArticleId } from '@/features/articles';
 
 import styles from './ArticlePreview.module.scss';
-import { useArticle } from '@/app/app-reducer';
+import { useArticle } from '@/core/app-reducer';
 
 interface TArticlePreviewProps {
   className?: string;

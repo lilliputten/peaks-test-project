@@ -112,6 +112,9 @@ export interface TRawArticle {
 // Extra fields data integrated into resulted article object
 export type TArticle = TRawArticle & TRawArticleFields;
 
+// TODO: Add TSection?
+// @see https://open-platform.theguardian.com/documentation/section
+
 // NOTE: Export sort modes ids (`sortModeIds`) to use in sort control.
 export const sortModeIds = [
   'newest',

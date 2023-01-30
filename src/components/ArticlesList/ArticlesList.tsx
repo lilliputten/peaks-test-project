@@ -6,7 +6,7 @@
 import React, { useMemo } from 'react';
 import classnames from 'classnames';
 
-import { useArticles, useLoading, useError } from '@/app/app-reducer';
+import { useArticles, useLoading, useError } from '@/core/app-reducer';
 import { errorToString } from '@/utils';
 import LoaderSplash from '@/ui-elements/LoaderSplash';
 import ArticlePreview from '@/components/ArticlePreview';

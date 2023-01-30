@@ -39,66 +39,70 @@ const articlesSlice = createSlice({
       state.pageNo = startPageNo; // ???
     },
   },
-  extraReducers: {
-    [String(fetchArticlesThunk.pending)]: (state: TArticlesState) => {
-      state.isLoading = true;
-      state.error = undefined;
-    },
-    [fetchArticlesThunk.fulfilled.toString()]: (
-      state: TArticlesState,
-      action: ArticlesPayloadAction,
-    ) => {
-      state.isLoading = false;
-      state.error = undefined;
-      const { payload } = action;
-      const { info, articles } = payload;
-      /* // Info data sample (NOTE: Indices start with 1, not 0!):
-       * status: 'ok',
-       * userTier: 'developer',
-       * total: 2402038,
-       * startIndex: 1,
-       * pageSize: 5,
-       * currentPage: 1,
-       * pages: 480408,
-       * orderBy: 'newest'
-       */
-      const { startIndex } = info;
-      const start = startIndex - 1; // NOTE: Indices start with 1, not 0!
-      /* // DEBUG
-       * console.log('[features/articles/reducer:fetchArticlesThunk.fulfilled]', {
-       *   info,
-       *   articles,
-       *   // meta,
-       * });
-       */
-      const newIds = [...state.ids];
-      const newArticles = [...state.articles];
-      const newArticlesHash = { ...state.articlesHash };
-      for (let i = 0; i < articles.length; i++) {
-        const article = articles[i];
-        const { id } = article;
-        newIds[start + i] = id;
-        newArticles[start + i] = article;
-        newArticlesHash[id] = article;
-      }
-      state.ids = newIds;
-      state.articles = newArticles;
-      state.articlesHash = newArticlesHash;
-    },
-    [String(fetchArticlesThunk.rejected)]: (
-      state: TArticlesState,
-      action: ArticlesPayloadAction,
-    ) => {
-      const { error, meta } = action;
-      // eslint-disable-next-line no-console
-      console.log('[features/articles/reducer:fetchArticlesThunk.rejected]', {
-        error,
-        meta,
-      });
-      debugger; // eslint-disable-line no-debugger
-      state.error = error;
-      state.isLoading = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        String(fetchArticlesThunk.pending),
+        (state: TArticlesState, _action: ArticlesPayloadAction) => {
+          state.isLoading = true;
+          state.error = undefined;
+        },
+      )
+      .addCase(
+        String(fetchArticlesThunk.fulfilled),
+        (state: TArticlesState, action: ArticlesPayloadAction) => {
+          state.isLoading = false;
+          state.error = undefined;
+          const { payload } = action;
+          const { info, articles } = payload;
+          /* // Info data sample (NOTE: Indices start with 1, not 0!):
+           * status: 'ok',
+           * userTier: 'developer',
+           * total: 2402038,
+           * startIndex: 1,
+           * pageSize: 5,
+           * currentPage: 1,
+           * pages: 480408,
+           * orderBy: 'newest'
+           */
+          const { startIndex } = info;
+          const start = startIndex - 1; // NOTE: Indices start with 1, not 0!
+          /* // DEBUG
+           * console.log('[features/articles/reducer:fetchArticlesThunk.fulfilled]', {
+           *   info,
+           *   articles,
+           *   // meta,
+           * });
+           */
+          const newIds = [...state.ids];
+          const newArticles = [...state.articles];
+          const newArticlesHash = { ...state.articlesHash };
+          for (let i = 0; i < articles.length; i++) {
+            const article = articles[i];
+            const { id } = article;
+            newIds[start + i] = id;
+            newArticles[start + i] = article;
+            newArticlesHash[id] = article;
+          }
+          state.ids = newIds;
+          state.articles = newArticles;
+          state.articlesHash = newArticlesHash;
+        },
+      )
+      .addCase(
+        String(fetchArticlesThunk.rejected),
+        (state: TArticlesState, action: ArticlesPayloadAction) => {
+          const { error, meta } = action;
+          // eslint-disable-next-line no-console
+          console.log('[features/articles/reducer:fetchArticlesThunk.rejected]', {
+            error,
+            meta,
+          });
+          debugger; // eslint-disable-line no-debugger
+          state.error = error;
+          state.isLoading = false;
+        },
+      );
   },
 });
 
