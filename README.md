@@ -41,7 +41,7 @@ npm run build-and-publish
 To just publish previously created build:
 
 ```
-npm run build-and-publish
+npm run publish
 ```
 
 ## Deply server
