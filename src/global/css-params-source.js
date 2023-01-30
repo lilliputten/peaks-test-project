@@ -10,7 +10,7 @@ const cssProcessRoutines = require('./css-params-process/css-process-routines');
 const theme = {}; // require(process.env.THEME_FILE);
 
 // Some reusable parameters...
-const defaultFontSize = theme.defaultFontSize || 16;
+const defaultFontSize = theme.defaultFontSize || 14;
 const textColor = theme.textColor || '#000';
 
 const defaultTransitionTime = 250;
@@ -157,6 +157,7 @@ const cssConfig = {
 
   // Fonts...
 
+  titleFont: theme.titleFont || 'Georgia, Times, serif',
   defaultFont:
     theme.defaultFont ||
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
