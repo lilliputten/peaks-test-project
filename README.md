@@ -1,5 +1,5 @@
 <!--
-@changed 2023.01.26, 19:27
+@changed 2023.01.31, 01:26
 -->
 
 # Peaks nextjs static client app
@@ -43,3 +43,9 @@ To just publish previously created build:
 ```
 npm run build-and-publish
 ```
+
+## Deply server
+
+When publishing, the project is deployed to
+[https://peaks.lilliputten.ru/](https://peaks.lilliputten.ru/)
+(access credentials are provided by request).
