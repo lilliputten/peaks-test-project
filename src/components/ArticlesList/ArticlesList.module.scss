@@ -1,28 +1,8 @@
 /** @module ArticlesList.module.scss
  *  @since 2023.01.27, 19:57
- *  @changed 2023.01.29, 00:46
+ *  @changed 2023.01.30, 19:20
  */
 
 .container {
-  flex: 1;
-  flex-direction: column;
-  display: flex;
-  position: relative;
-  overflow: hidden;
-}
-
-.contentError {
-  color: $errorColor;
-}
-
-.contentContainer {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.smallLoade {
-  /*!KEEP*/
-}
-.loaderSplash {
   /*!KEEP*/
 }

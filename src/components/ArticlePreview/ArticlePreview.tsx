@@ -7,20 +7,20 @@ import React from 'react';
 import classnames from 'classnames';
 
 import { TArticle, TArticleId } from '@/features/articles';
+import { useArticle } from '@/core/app-reducer';
 
 import styles from './ArticlePreview.module.scss';
-import { useArticle } from '@/core/app-reducer';
 
 interface TArticlePreviewProps {
   className?: string;
   id: TArticleId;
 }
 
-interface DataItemProps {
+interface DebugDataItemProps {
   id: string;
   value?: string | number | boolean;
 }
-function DataItem({ id, value }: DataItemProps): JSX.Element {
+function DebugDataItem({ id, value }: DebugDataItemProps): JSX.Element {
   return (
     <div className={styles.dataItem}>
       <span className={styles.dataItemLabel}>{id}:</span>{' '}
@@ -28,16 +28,17 @@ function DataItem({ id, value }: DataItemProps): JSX.Element {
     </div>
   );
 }
-export default function ArticlePreview(props: TArticlePreviewProps): JSX.Element {
+export function ArticlePreview(props: TArticlePreviewProps): JSX.Element {
   const { className, id } = props;
 
   const article = useArticle(id);
+  // DEBUG: Display only article properties
   const keys = article && Object.keys(article);
   const items =
     keys &&
     keys.map((key) => {
       const value = article[key as keyof TArticle] as string | boolean | number | undefined;
-      return !!value && <DataItem key={id + ':' + key} id={key} value={value} />;
+      return !!value && <DebugDataItem key={id + ':' + key} id={key} value={value} />;
     });
   /* // DEBUG
    * console.log('[ArticlePreview:DEBUG]', {
