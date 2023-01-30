@@ -91,7 +91,8 @@ $colorBarSizePx: 3px;
 }
 
 // Details geometry customization...
-.cardType_medium { // 350x350
+.cardType_medium {
+  // 350x350
   width: $mediumCardSizePx;
   height: $mediumCardSizePx;
   .thumbnail {
@@ -111,7 +112,8 @@ $colorBarSizePx: 3px;
   }
 }
 .cardType_small, // 255x255
-.cardType_smallText { // 255x138
+.cardType_smallText {
+  // 255x138
   width: $smallCardSizePx;
   height: $smallCardSizePx;
   .thumbnail {
@@ -131,7 +133,8 @@ $colorBarSizePx: 3px;
     // letter-spacing: 0.063px;
   }
 }
-.cardType_smallText { // 255x138
+.cardType_smallText {
+  // 255x138
   height: $smallTextCardSizePx;
   .thumbnail {
     display: none;
@@ -140,7 +143,8 @@ $colorBarSizePx: 3px;
     height: $smallTextCardSizePx;
   }
 }
-.cardType_large { // 540x425
+.cardType_large {
+  // 540x425
   width: $largeCardWidthPx;
   height: $largeCardSizePx;
   .thumbnail {
