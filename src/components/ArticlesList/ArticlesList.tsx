@@ -7,7 +7,7 @@ import React, { useMemo } from 'react';
 import classnames from 'classnames';
 
 import { useArticles } from '@/core/app-reducer';
-import { ArticlePreview } from '@/components/ArticlePreview';
+import { ArticleCard } from '@/components/ArticleCard';
 import { withArticlesWrapper } from '@/components/ArticlesWrapper';
 
 import styles from './ArticlesList.module.scss';
@@ -27,7 +27,16 @@ export function ArticlesList(props: TArticlesListProps): JSX.Element {
   const articles = useArticles();
 
   const content = useMemo(() => {
-    return articles.map(({ id }) => <ArticlePreview key={id} id={id} />);
+    return articles.map(({ id }) => (
+      <ArticleCard
+        // cardType="large"
+        // cardType="smallText"
+        // cardType="small"
+        cardType="medium"
+        key={id}
+        id={id}
+      />
+    ));
   }, [articles]);
 
   return <div className={classnames(className, styles.container)}>{content}</div>;

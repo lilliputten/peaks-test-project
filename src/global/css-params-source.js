@@ -16,7 +16,7 @@ const textColor = theme.textColor || '#000';
 const defaultTransitionTime = 250;
 const defaultAnimationTime = 500;
 
-const primaryColor = theme.primaryColor || '#09357B';
+const primaryColor = theme.primaryColor || '#09357b';
 const secondaryColor = theme.secondaryColor || '#ffa550'; // UNUSED
 
 const errorColor = theme.errorColor || '#c33';

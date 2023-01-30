@@ -4,6 +4,7 @@
 
 # Changelog
 
+- 2023.01.31, 01:13 -- Differrent types of article cards: large (540x425), medium (350x350), small (255x255), small text only (255x138).
 - 2023.01.30, 19:22 -- Added articles wrapper hoc (extraced loaders and error from articles list component).
 - 2023.01.30, 17:17 -- Added serif font style definition for titles.
 - 2023.01.30, 17:16 -- Fixed nextjs warnings: `app` folder renamed to `core`, changed `extraReducers` to builder scheme.

@@ -96,7 +96,7 @@ const nextConfig = {
   env: envParams,
   sassOptions: {
     includePaths: [generatedCssParamsPath],
-    prependData: '@use "sass:math"; @import "' + generatedCssParamsScssFilename + '";',
+    prependData: '@use "sass:math"; @use "sass:color"; @import "' + generatedCssParamsScssFilename + '";',
   },
 };
 

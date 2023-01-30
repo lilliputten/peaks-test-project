@@ -29,7 +29,7 @@ const defaultFieldsList: TShowFieldsList = [
   // 'commentCloseDate', // The date the comments have been closed -- Datetime
   // 'commentable', // String (Boolean)
   // 'hasStoryPackage', // Has related content selected by editors -- String (boolean)
-  'headline', // String (HTML)
+  // 'headline', // String (HTML) (Same as webTitle.)
   // 'internalPageCode', // String
   // 'isPremoderated', // Comments will be checked by a moderator prior to publication if true -- String (Boolean)
   // 'lastModified', // Datetime
@@ -40,7 +40,7 @@ const defaultFieldsList: TShowFieldsList = [
   'shortUrl', // String
   // 'shouldHideAdverts', // Adverts will not be displayed if true -- String (Boolean)
   // 'showInRelatedContent', // Whether this content can appear in automatically generated Related Content -- String (boolean)
-  'standfirst', // String (HTML)
+  // 'standfirst', // String (HTML) (Same as trailText, but without wrapping tag.)
   // 'starRating', // String (Integer)
   'thumbnail', // String
   'trailText', // String (HTML)
@@ -59,7 +59,7 @@ export const startPageNo = 1;
 
 // Default parameters
 export const defaultParams: TArticlesParams = {
-  query: 'Gunther Millions',
+  query: '',
   sortMode: defaultSortMode,
   pageNo: startPageNo,
   pageSize: defaultPageSize,
