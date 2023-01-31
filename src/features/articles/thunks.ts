@@ -5,18 +5,19 @@
 
 import { AnyAction, createAsyncThunk, Store, ThunkDispatch } from '@reduxjs/toolkit';
 
-import { TArticlesSearchResult, TArticlesState } from './types';
+import { TArticlesParams, TArticlesSearchResult } from './types';
 import { fetchArticles } from './service';
-import { RootState } from '@/core/app-reducer';
+import { RootState } from '@/core/app/app-reducer';
 
-export type FetchArticlesThunkParams = Pick<
-  TArticlesState,
-  'query' | 'sortMode' | 'pageNo' | 'pageSize'
->;
+type TFetchArticlesThunkParams = TArticlesParams;
+// type TFetchArticlesThunkParams = Pick<
+//   TArticlesState,
+//   'query' | 'sortMode' | 'pageNo' | 'pageSize'
+// >;
 
 export const fetchArticlesThunk = createAsyncThunk(
   'articles/fetchArticlesThunk',
-  async (params: FetchArticlesThunkParams): Promise<TArticlesSearchResult> => {
+  async (params: TFetchArticlesThunkParams): Promise<TArticlesSearchResult> => {
     /* // DEBUG
      * console.log('[thunks:fetchArticlesThunk]', {
      *   params,
@@ -30,7 +31,7 @@ export function fetchArticlesAction(rootStore: Store<RootState>): void {
   const thunkDispatch = rootStore.dispatch as ThunkDispatch<RootState, void, AnyAction>;
   const articlesState = rootStore.getState().articles;
   const { query, sortMode, pageNo, pageSize } = articlesState;
-  const params: FetchArticlesThunkParams = { query, sortMode, pageNo, pageSize };
+  const params: TFetchArticlesThunkParams = { query, sortMode, pageNo, pageSize };
   /* // DEBUG
    * console.log('[thunks:fetchArticlesAction]', {
    *   sortMode,

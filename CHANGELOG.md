@@ -1,9 +1,10 @@
 <!--
-@changed 2023.01.31, 17:09
+@changed 2023.01.31, 20:35
 -->
 
 # Changelog
 
+- 2023.01.31, 20:34 -- Added basic ArticleView component. Extracted core typings & constants, moved app core components to `core/app`.
 - 2023.01.31, 17:08 <- 2023.01.31, 16:03 -- Single article load service, article card with full article data (to reuse from different lists with different data sources).
 - 2023.01.31, 01:13 -- Differrent types of article cards: large (540x425), medium (350x350), small (255x255), small text only (255x138).
 - 2023.01.30, 19:22 -- Added articles wrapper hoc (extraced loaders and error from articles list component).

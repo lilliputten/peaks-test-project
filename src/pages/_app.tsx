@@ -8,8 +8,8 @@ import { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
 
 import '@/global/global-includes';
-import { store } from '@/core/app-store';
-import AppWrapper from '@/core/app-wrapper';
+import { store } from '@/core/app/app-store';
+import AppWrapper from '@/core/app/app-wrapper';
 
 import '@/global/styles.scss';
 

@@ -5,14 +5,8 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import {
-  TArticle,
-  TArticlesSearchResult,
-  TSortMode,
-  TArticlesState,
-  TArticlesParams,
-  TArticleId,
-} from './types';
+import { TArticle, TArticleId } from '@/core/types';
+import { TArticlesSearchResult, TSortMode, TArticlesState, TArticlesParams } from './types';
 import { initialState, startPageNo } from './constants';
 import { fetchArticlesThunk } from './thunks';
 

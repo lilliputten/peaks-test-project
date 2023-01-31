@@ -6,7 +6,8 @@
 import { combineReducers } from 'redux';
 import { shallowEqual, TypedUseSelectorHook, useSelector } from 'react-redux';
 
-import { TArticleId, TArticlesState } from '@/features/articles';
+import { TArticleId } from '@/core/types';
+import { TArticlesState } from '@/features/articles';
 import {
   articlesReducer,
   selectLoading,

@@ -7,7 +7,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { useArticles, useLoading, useError } from '@/core/app-reducer';
+import { useArticles, useLoading, useError } from '@/core/app/app-reducer';
 import { errorToString, TReactContent } from '@/utils';
 import LoaderSplash from '@/ui-elements/LoaderSplash';
 

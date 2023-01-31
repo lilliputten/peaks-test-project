@@ -6,6 +6,7 @@
 import axios from 'axios';
 
 import config from '@/config';
+import { defaultFieldsString } from '@/core/constants';
 import {
   TArticlesSearchResult,
   TArticlesSearchParams,
@@ -16,7 +17,6 @@ import {
   TArticleLoadResult,
   TArticleLoadQueryResult,
 } from './types';
-import { defaultFieldsString } from './constants';
 import { combineArticleData } from './helpers';
 
 /* // Info:

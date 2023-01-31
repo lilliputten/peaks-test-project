@@ -6,8 +6,8 @@
 import React, { useMemo } from 'react';
 import classnames from 'classnames';
 
-import { TArticle, TArticleId } from '@/features/articles';
-import { useArticleById } from '@/core/app-reducer';
+import { TArticle, TArticleId } from '@/core/types';
+import { useArticleById } from '@/core/app/app-reducer';
 
 import styles from './ArticleCard.module.scss';
 

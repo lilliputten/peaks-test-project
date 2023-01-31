@@ -15,7 +15,7 @@ export default function IndexPage(): JSX.Element {
   const { title } = siteConfig;
   return (
     <GenericPageLayout title={title} rootPage>
-      <WrappedArticleList />
+      TODO: IndexPage
     </GenericPageLayout>
   );
 }

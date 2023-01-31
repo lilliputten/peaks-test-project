@@ -3,7 +3,7 @@
  *  @changed 2023.01.28, 20:29
  */
 
-import { TArticle, TRawArticle } from './types';
+import { TArticle, TRawArticle } from '@/core/types';
 
 /** Inject optional fields into main data object */
 export function combineArticleData(item: TRawArticle): TArticle {
