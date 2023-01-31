@@ -1,9 +1,10 @@
 <!--
-@changed 2023.01.31, 22:31
+@changed 2023.01.31, 23:25
 -->
 
 # Changelog
 
+- 2023.01.31, 23:25 -- Added article view components wrappers, DebugData.
 - 2023.01.31, 22:31 -- Added feature, store and reducers for current article functional (features/article), added article view page (in progress).
 - 2023.01.31, 20:34 -- Added basic ArticleView component. Extracted core typings & constants, moved app core components to `core/app`.
 - 2023.01.31, 17:08 <- 2023.01.31, 16:03 -- Single article load service, article card with full article data (to reuse from different lists with different data sources).

@@ -1,13 +1,13 @@
 /** @module ViewArticlePage
  *  @since 2023.01.31, 17:18
- *  @changed 2023.01.31, 17:18
+ *  @changed 2023.01.31, 23:07
  */
 
 import { useRouter } from 'next/router';
 
 import { useCurrentArticleTitle } from '@/core/app/app-reducer';
 import GenericPageLayout from '@/layout/GenericPageLayout';
-import { ArticleViewById } from '@/components';
+import { WrappedArticleViewById } from '@/components';
 import { subPageTitle } from '@/ui-support/pageUtils';
 
 export default function ViewArticlePage(): JSX.Element {
@@ -18,7 +18,7 @@ export default function ViewArticlePage(): JSX.Element {
   const title = subPageTitle(pageTitle);
   return (
     <GenericPageLayout title={title} rootPage>
-      <ArticleViewById id={id} />
+      <WrappedArticleViewById id={id} />
     </GenericPageLayout>
   );
 }

@@ -1,13 +1,14 @@
 /** @module reducer
  *  @since 2023.01.31, 20:43
- *  @changed 2023.01.31, 22:23
+ *  @changed 2023.01.31, 22:48
  */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { absentArticleTitle, loadingArticleTitle } from '@/config/site';
 import { TArticle, TArticleId } from '@/core/types';
 import { TFetchArticlePayloadAction, TArticleState } from './types';
-import { absentArticleTitle, initialState, loadingArticleTitle } from './constants';
+import { initialState } from './constants';
 import { fetchArticleThunk } from './thunks';
 
 const articleSlice = createSlice({
@@ -39,11 +40,11 @@ const articleSlice = createSlice({
       .addCase(
         String(fetchArticleThunk.fulfilled),
         (state: TArticleState, action: TFetchArticlePayloadAction) => {
-          state.isLoading = false;
-          state.error = undefined;
           const { payload } = action;
           const { article } = payload;
           state.currentArticle = article;
+          state.isLoading = false;
+          state.error = undefined;
         },
       )
       .addCase(

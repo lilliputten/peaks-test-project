@@ -1,6 +1,6 @@
 /** @module ArticleView
  *  @since 2023.01.29, 22:45
- *  @changed 2023.01.31, 22:19
+ *  @changed 2023.01.31, 23:06
  */
 
 import React, { useEffect, useMemo } from 'react';
@@ -9,58 +9,47 @@ import classnames from 'classnames';
 import { useAppDispatch } from '@/core/app/app-store';
 import { TArticle, TArticleId } from '@/core/types';
 import { useCurrentArticle } from '@/core/app/app-reducer';
+import { setCurrentArticleId } from '@/features/article/reducer';
+import { withArticleWrapper } from '../ArticleWrapper';
 
 import styles from './ArticleView.module.scss';
-import { setCurrentArticleId } from '@/features/article/reducer';
+import { DebugData } from '@/components/Common/DebugData/DebugData';
 
-interface TArticleViewByIdProps {
+interface TArticleViewByIdProps extends JSX.IntrinsicAttributes {
   className?: string;
   id?: TArticleId;
 }
-interface TArticleViewProps {
+interface TArticleViewWithDataProps extends JSX.IntrinsicAttributes {
   className?: string;
   article?: TArticle | string;
 }
 
-// DEBUG!
-interface DebugDataItemProps {
-  id: string;
-  value?: string | number | boolean;
-}
-function DebugDataItem({ id, value }: DebugDataItemProps): JSX.Element {
-  return (
-    <div className={styles.dataItem}>
-      <span className={styles.dataItemLabel}>{id}:</span>{' '}
-      <span className={styles.dataItemValue}>{value}</span>
-    </div>
-  );
-}
+/* // TODO?
+ * interface TArticleViewContentProps {
+ *   article: TArticle;
+ * }
+ * function ArticleViewContent({ article }: TArticleViewContentProps): JSX.Element {
+ *   const { id } = article;
+ *   // DEBUG: Display only article properties
+ *   const keys = article && Object.keys(article);
+ *   const items =
+ *     keys &&
+ *     keys.map((key) => {
+ *       const value = article[key as keyof TArticle] as string | boolean | number | undefined;
+ *       return !!value && <DebugDataItem key={id + ':' + key} id={key} value={value} />;
+ *     });
+ *   [> // DEBUG
+ *    * console.log('[ArticleViewWithData:DEBUG]', {
+ *    *   items,
+ *    *   keys,
+ *    *   article,
+ *    * });
+ *    <]
+ *   return <>{items}</>;
+ * }
+ */
 
-interface TArticleViewContentProps {
-  article: TArticle;
-}
-
-function ArticleViewContent({ article }: TArticleViewContentProps): JSX.Element {
-  const { id } = article;
-  // DEBUG: Display only article properties
-  const keys = article && Object.keys(article);
-  const items =
-    keys &&
-    keys.map((key) => {
-      const value = article[key as keyof TArticle] as string | boolean | number | undefined;
-      return !!value && <DebugDataItem key={id + ':' + key} id={key} value={value} />;
-    });
-  /* // DEBUG
-   * console.log('[ArticleView:DEBUG]', {
-   *   items,
-   *   keys,
-   *   article,
-   * });
-   */
-  return <>{items}</>;
-}
-
-export function ArticleView(props: TArticleViewProps): JSX.Element {
+export function ArticleViewWithData(props: TArticleViewWithDataProps): JSX.Element {
   const { className, article } = props;
   const content = useMemo(() => {
     if (!article) {
@@ -69,7 +58,7 @@ export function ArticleView(props: TArticleViewProps): JSX.Element {
     } else if (typeof article === 'string') {
       return article;
     } else {
-      return <ArticleViewContent article={article} />;
+      return <DebugData data={article} />;
     }
   }, [article]);
   // prettier-ignore
@@ -87,7 +76,10 @@ export function ArticleViewById(props: TArticleViewByIdProps): JSX.Element {
     dispatch(setCurrentArticleId(id));
   }, [id, dispatch]);
   const article = useCurrentArticle();
-  return <ArticleView className={className} article={article} />;
+  return <ArticleViewWithData className={className} article={article} />;
 }
 
-// TODO: Loading state?
+// Export wrapped versions
+export const WrappedArticleViewById = withArticleWrapper<TArticleViewByIdProps>(ArticleViewById);
+export const WrappedArticleViewWithData =
+  withArticleWrapper<TArticleViewWithDataProps>(ArticleViewWithData);
