@@ -92,7 +92,7 @@
     "type-check": "echo --Run typescript linter-- && tsc --pretty --noEmit",
     "prettier": "prettier --write .",
     "test-all": "echo --Run all lint & test tasks-- && npm-run-all lint type-check test && echo --All tests passed--",
-    "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all stylelint lint type-check prettier && echo --All check-ups passed--",
+    "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all prettier stylelint lint type-check && echo --All check-ups passed--",
     "stylelint": "echo --Lint styles-- && stylelint src/**/*.{css,scss,less}",
     "lint": "echo --Lint sources-- && eslint src --ext ts --ext tsx --ext js",
     "test": "echo --Run tests-- && jest",

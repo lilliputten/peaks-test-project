@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 import { useCurrentArticleTitle } from '@/core/app/app-reducer';
 import GenericPageLayout from '@/layout/GenericPageLayout';
-import { ArticleViewById } from '@/components/ArticleView';
+import { ArticleViewById } from '@/components';
 import { subPageTitle } from '@/ui-support/pageUtils';
 
 export default function ViewArticlePage(): JSX.Element {

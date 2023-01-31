@@ -10,8 +10,6 @@ import Link from 'next/link';
 
 import styles from './NotFoundContent.module.scss';
 
-export const title = 'Page not found';
-
 interface TNotFoundContentProps {
   className?: string;
 }

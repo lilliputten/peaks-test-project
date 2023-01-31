@@ -7,8 +7,8 @@ import React, { useMemo } from 'react';
 import classnames from 'classnames';
 
 import { useArticles } from '@/core/app/app-reducer';
-import { ArticleCardById } from '@/components/ArticleCard';
-import { withArticlesWrapper } from '@/components/ArticlesWrapper';
+import { ArticleCardById } from '../ArticleCard';
+import { withArticlesWrapper } from '../ArticlesWrapper';
 
 import styles from './ArticlesList.module.scss';
 

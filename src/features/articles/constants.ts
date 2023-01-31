@@ -4,7 +4,6 @@
  */
 
 import * as buildConfig from '@/config/build';
-import { TShowFieldsList } from '@/core/types';
 import { sortModeIds, TArticlesParams, TArticlesState } from './types';
 
 /* // Info:

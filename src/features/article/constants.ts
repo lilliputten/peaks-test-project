@@ -17,8 +17,3 @@ export const initialState: TArticleState = {
 export const defaultArticleParams = {
   id: undefined,
 };
-
-// Misc article titles...
-export const loadingArticleTitle = 'Loading article';
-export const absentArticleTitle = 'Article not loaded';
-// TODO: Empty article title?

@@ -5,7 +5,6 @@
 
 import * as siteConfig from '@/config/site';
 import GenericPageLayout from '@/layout/GenericPageLayout';
-import { WrappedArticleList } from '@/components/ArticlesList';
 
 // TODO 2023.01.30, 19:17 -- Use specific frontpage articles list component
 // (task?). Left ArticleList for ordinary search results and bookmarked
