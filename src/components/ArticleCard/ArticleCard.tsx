@@ -7,10 +7,11 @@ import React, { useMemo } from 'react';
 import classnames from 'classnames';
 
 import { TArticle, TArticleId } from '@/features/articles';
-import { useArticle } from '@/core/app-reducer';
+import { useArticleById } from '@/core/app-reducer';
 
 import styles from './ArticleCard.module.scss';
 
+// TODO: Move to types?
 const articleCardTypes = [
   'large', // 540x425
   'medium', // 350x350
@@ -19,12 +20,6 @@ const articleCardTypes = [
 ] as const;
 export type TArticleCardType = (typeof articleCardTypes)[number];
 export const defaultArticleCardType: TArticleCardType = 'medium';
-
-interface TArticleCardProps {
-  className?: string;
-  id: TArticleId;
-  cardType?: TArticleCardType;
-}
 
 const defaultThumbnailUrl = '/images/assets/Logo_White.png';
 
@@ -49,12 +44,15 @@ const defaultThumbnailUrl = '/images/assets/Logo_White.png';
  * thumbnail: https://media.guim.co.uk/d78e50b932ec3118f3c17522a09250a29882ddd1/0_167_3000_1800/500.jpg
  */
 
-interface ArticleCardDetailsProps {
+interface TBasicDetailsProps {
+  cardType?: TArticleCardType;
+}
+interface TArticleCardDetailsProps {
   article: TArticle;
-  cardProps: TArticleCardProps;
+  basicCardProps: TBasicDetailsProps;
 }
 
-function ArticleCardThumbnail({ article }: ArticleCardDetailsProps): JSX.Element {
+function ArticleCardThumbnail({ article }: TArticleCardDetailsProps): JSX.Element {
   const {
     thumbnail, // https://media.guim.co.uk/d78e50b932ec3118f3c17522a09250a29882ddd1/0_167_3000_1800/500.jpg
   } = article;
@@ -65,8 +63,8 @@ function ArticleCardThumbnail({ article }: ArticleCardDetailsProps): JSX.Element
   return <div className={className} style={style} />;
 }
 
-function ArticleCardText({ article, cardProps }: ArticleCardDetailsProps): JSX.Element {
-  const { cardType } = cardProps;
+function ArticleCardText({ article, basicCardProps }: TArticleCardDetailsProps): JSX.Element {
+  const { cardType } = basicCardProps;
   const {
     // id, // us-news/2023/jan/29/us-utilities-shut-off-power-to-millions-amid-record-profits
     // type, // article
@@ -104,31 +102,53 @@ function ArticleCardText({ article, cardProps }: ArticleCardDetailsProps): JSX.E
   );
 }
 
-function ArticleCardContent({ article, cardProps }: ArticleCardDetailsProps): JSX.Element {
+function ArticleCardContent({ article, basicCardProps }: TArticleCardDetailsProps): JSX.Element {
+  const { cardType } = basicCardProps;
+  // NOTE: All card types except `smallText` has image preview.
+  const hasThumbnail = cardType !== 'smallText';
   return (
     <>
-      <ArticleCardThumbnail article={article} cardProps={cardProps} />
-      <ArticleCardText article={article} cardProps={cardProps} />
+      {hasThumbnail && <ArticleCardThumbnail article={article} basicCardProps={basicCardProps} />}
+      <ArticleCardText article={article} basicCardProps={basicCardProps} />
+      {/* TODO: To fetch and pass parameters to customize color bar color (Using `ArticleCardColorBar` component)? */}
       <div className={styles.colorBar} />
     </>
   );
 }
 
+interface TArticleCardProps extends TBasicDetailsProps {
+  className?: string;
+  article?: TArticle | string;
+}
+
+interface TArticleByCardProps extends TBasicDetailsProps {
+  className?: string;
+  id: TArticleId;
+}
+
 export function ArticleCard(props: TArticleCardProps): JSX.Element {
-  const { className, id, cardType = defaultArticleCardType } = props;
-  const article = useArticle(id);
-  const content = useMemo(
-    () =>
-      article ? (
-        <ArticleCardContent article={article} cardProps={props} />
-      ) : (
-        'No article data found for id ' + id
-      ),
-    [id, article, props],
-  );
+  const { className, article, ...basicCardProps } = props;
+  const { cardType = defaultArticleCardType } = basicCardProps;
+  const content = useMemo(() => {
+    if (!article) {
+      // TODO: Throw an error? Display empty block?
+      return 'Article data is not defined';
+    } else if (typeof article === 'string') {
+      return article;
+    } else {
+      return <ArticleCardContent article={article} basicCardProps={basicCardProps} />;
+    }
+  }, [article, basicCardProps]);
   return (
     <div className={classnames(className, styles.container, styles['cardType_' + cardType])}>
       {content}
     </div>
   );
+}
+
+// Wrap bare (based on straght data) article renderer with data fetcher by id.
+export function ArticleCardById(props: TArticleByCardProps): JSX.Element {
+  const { className, id, cardType = defaultArticleCardType } = props;
+  const article = useArticleById(id) || 'No article data found for id ' + id;
+  return <ArticleCard className={className} cardType={cardType} article={article} />;
 }

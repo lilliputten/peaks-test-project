@@ -13,7 +13,7 @@ import {
   selectError,
   selectArticleIds,
   selectArticles,
-  selectArticle,
+  selectArticleById,
   selectParams,
 } from '@/features/articles/reducer';
 
@@ -36,6 +36,6 @@ export const useArticleIds = (): ReturnType<typeof selectArticleIds> =>
   selectArticleIds(useArticlesState());
 export const useArticles = (): ReturnType<typeof selectArticles> =>
   selectArticles(useArticlesState());
-export const useArticle = (id: TArticleId): ReturnType<typeof selectArticle> =>
-  selectArticle(useArticlesState(), id);
+export const useArticleById = (id: TArticleId): ReturnType<typeof selectArticleById> =>
+  selectArticleById(useArticlesState(), id);
 export const useParams = (): ReturnType<typeof selectParams> => selectParams(useArticlesState());

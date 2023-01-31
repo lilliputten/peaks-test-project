@@ -7,7 +7,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import {
   TArticle,
-  TArticleSearchResult,
+  TArticlesSearchResult,
   TSortMode,
   TArticlesState,
   TArticlesParams,
@@ -16,7 +16,7 @@ import {
 import { initialState, startPageNo } from './constants';
 import { fetchArticlesThunk } from './thunks';
 
-type ArticlesPayloadAction = PayloadAction<TArticleSearchResult, string, unknown, Error>;
+type ArticlesPayloadAction = PayloadAction<TArticlesSearchResult, string, unknown, Error>;
 
 const articlesSlice = createSlice({
   name: 'articles',
@@ -106,29 +106,20 @@ const articlesSlice = createSlice({
   },
 });
 
-const selectLoading = (state: TArticlesState): TArticlesState['isLoading'] => state.isLoading;
-const selectError = (state: TArticlesState): TArticlesState['error'] => state.error;
-const selectArticleIds = (state: TArticlesState): TArticleId[] => state.ids;
-const selectArticles = (state: TArticlesState): TArticle[] => state.articles;
-const selectArticlesHash = (state: TArticlesState): Record<TArticleId, TArticle> =>
+// See reducers creation in `src/app/app-reducer.ts`
+export const selectLoading = (state: TArticlesState): TArticlesState['isLoading'] =>
+  state.isLoading;
+export const selectError = (state: TArticlesState): TArticlesState['error'] => state.error;
+export const selectArticleIds = (state: TArticlesState): TArticleId[] => state.ids;
+export const selectArticles = (state: TArticlesState): TArticle[] => state.articles;
+export const selectArticlesHash = (state: TArticlesState): Record<TArticleId, TArticle> =>
   state.articlesHash;
-const selectArticle = (state: TArticlesState, id: TArticleId): TArticle | undefined =>
+export const selectArticleById = (state: TArticlesState, id: TArticleId): TArticle | undefined =>
   state.articlesHash[id];
-const selectParams = (state: TArticlesState): TArticlesParams => {
-  // TODO: To memoize params object?
+export const selectParams = (state: TArticlesState): TArticlesParams => {
+  // TODO: To memoize entire params object?
   const { query, sortMode, pageNo, pageSize } = state;
   return { query, sortMode, pageNo, pageSize };
-};
-
-// See reducers creation in `src/app/app-reducer.ts`
-export {
-  selectLoading,
-  selectError,
-  selectArticleIds,
-  selectArticles,
-  selectArticlesHash,
-  selectArticle,
-  selectParams,
 };
 
 export const { setSortMode, setPageNo, setPageSize, resetData } = articlesSlice.actions;

@@ -29,7 +29,7 @@ const defaultFieldsList: TShowFieldsList = [
   // 'commentCloseDate', // The date the comments have been closed -- Datetime
   // 'commentable', // String (Boolean)
   // 'hasStoryPackage', // Has related content selected by editors -- String (boolean)
-  // 'headline', // String (HTML) (Same as webTitle.)
+  // 'headline', // String (HTML) (Same as webTitle from TRawArticle.)
   // 'internalPageCode', // String
   // 'isPremoderated', // Comments will be checked by a moderator prior to publication if true -- String (Boolean)
   // 'lastModified', // Datetime

@@ -127,7 +127,6 @@ function makeScssConfig(cssConfig, initialString) {
  */
 function createColorVariants(color /* : string */) {
   const tinyColor = tinycolor(color);
-  // TODO 2022.01.03, 23:24 -- Make iterative colors creation using `lighten` and `darken` options objects...
   const varinats = {
     50: tinyColor.clone().lighten(60).toHexString(),
     100: tinyColor.clone().lighten(40).toHexString(),

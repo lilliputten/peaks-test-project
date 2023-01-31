@@ -1,0 +1,25 @@
+/** @module ArticleView.module.scss
+ *  @since 2023.01.29, 22:45
+ *  @changed 2023.01.29, 23:31
+ */
+
+.container {
+  margin: $blockPaddingPx;
+}
+
+.dataItem,
+.dataItemLabel,
+.dataItemValue {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dataItem {
+  margin: 2px 0;
+}
+.dataItemLabel {
+  opacity: 0.5;
+}
+.dataItemValue {
+}

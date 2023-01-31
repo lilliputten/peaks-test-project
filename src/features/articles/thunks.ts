@@ -5,7 +5,7 @@
 
 import { AnyAction, createAsyncThunk, Store, ThunkDispatch } from '@reduxjs/toolkit';
 
-import { TArticleSearchResult, TArticlesState } from './types';
+import { TArticlesSearchResult, TArticlesState } from './types';
 import { fetchArticles } from './service';
 import { RootState } from '@/core/app-reducer';
 
@@ -16,7 +16,7 @@ export type FetchArticlesThunkParams = Pick<
 
 export const fetchArticlesThunk = createAsyncThunk(
   'articles/fetchArticlesThunk',
-  async (params: FetchArticlesThunkParams): Promise<TArticleSearchResult> => {
+  async (params: FetchArticlesThunkParams): Promise<TArticlesSearchResult> => {
     /* // DEBUG
      * console.log('[thunks:fetchArticlesThunk]', {
      *   params,

@@ -1,6 +1,6 @@
 /** @module types
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.28, 23:47
+ *  @changed 2023.01.31, 16:46
  */
 
 export interface TArticlesParams {
@@ -10,10 +10,13 @@ export interface TArticlesParams {
   pageSize: number;
 }
 
-// Application-level parameters (will be translated to `TSearchQueryParams`):
-export interface TArticleSearchParams extends Partial<TArticlesParams> {
+export interface TArticleCommonParams {
   showFields?: TShowFieldsList;
 }
+
+// Application-level parameters (will be translated to `TArticlesSearchQueryParams`):
+export type TArticlesSearchParams = Partial<TArticlesParams> & TArticleCommonParams;
+export type TArticleLoadParams = { id: TArticleId } & TArticleCommonParams;
 export interface TArticlesState extends TArticlesParams {
   ids: TArticleId[];
   articlesHash: Record<TArticleId, TArticle>;
@@ -62,7 +65,7 @@ export interface TRawArticleFields {
   wordcount?: string; // String (Integer), eg: '1404'
 }
 
-// Available options for `show-fields` (string constants):
+// Available options for `show-fields` (string constants, see `defaultFieldsList` in constants):
 export type TShowFieldsOption =
   | 'all' // Includes all the fields
   | 'allowUgc' // May have associated User Generated Content. This typically means the content has an associated Guardian Witness assignment which can be accessed by querying show-references=witness-assignment -- String (Boolean)
@@ -124,7 +127,7 @@ export const sortModeIds = [
 // Sort mode type (from ids list)
 export type TSortMode = (typeof sortModeIds)[number];
 
-export interface TArticleSearchInfo {
+export interface TArticlesSearchInfo {
   // NOTE: Indices start with 1, not 0!
   status: string; // 'ok',
   userTier: string; // 'developer',
@@ -136,20 +139,35 @@ export interface TArticleSearchInfo {
   sortMode: TSortMode; // 'newest',
 }
 
-interface TArticleSearchQueryResponse extends TArticleSearchInfo {
+interface TArticlesSearchQueryResponse extends TArticlesSearchInfo {
   results: TRawArticle[];
 }
 
-export interface TArticleSearchQueryResult {
-  response: TArticleSearchQueryResponse;
+export interface TArticlesSearchQueryResult {
+  response: TArticlesSearchQueryResponse;
 }
 
-export interface TArticleSearchResult {
-  info: TArticleSearchInfo;
+export interface TArticlesSearchResult {
+  info: TArticlesSearchInfo;
   articles: TArticle[];
 }
+export interface TArticleLoadResult {
+  article: TArticle;
+}
 
-export interface TSearchQueryParams {
+interface TArticleLoadQueryResponse {
+  content: TRawArticle;
+}
+export interface TArticleLoadQueryResult {
+  response: TArticleLoadQueryResponse;
+}
+
+export interface TArticleLoadQueryParams {
+  // id: TArticleId; // ID passed in url path! The ID for an item, such as a piece of content, is the path to that item on the site. By replacing the domain with content.guardianapis.com you get the API URL for that piece of content.
+  'show-fields'?: string; // Add fields associated with the content
+  'api-key': string; // The API key used for the query
+}
+export interface TArticlesSearchQueryParams {
   q?: string; // Request content containing this free text. Supports AND, OR and NOT operators, and exact phrase queries using double quotes.
   page?: number; // Return only the result set from a particular page Integer e.g. 5
   'page-size'?: number; // Modify the number of items displayed per page  Integer 1 to 50
