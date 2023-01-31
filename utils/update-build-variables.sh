@@ -59,7 +59,7 @@ function UPDATE_FILE() {
   rm $FILE.bak || exit 1
 }
 
-UPDATE_FILE "package-lock.json"
+# UPDATE_FILE "package-lock.json"
 UPDATE_FILE ".env.local"
 UPDATE_FILE "package.json"
 UPDATE_FILE "README.md"
