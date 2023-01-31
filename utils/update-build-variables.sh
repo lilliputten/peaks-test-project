@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Update version number & build timestamps
-# @changed 2023.01.27, 18:02
+# @changed 2023.01.31, 19:08
 
 # Import config variables (expected variables `$DIST_REPO` and `$PUBLISH_FOLDER`)...
 test -f "./utils/config.sh" && . "./utils/config.sh"
@@ -32,6 +32,11 @@ function UPDATE_FILE() {
   EXT="${FILE##*.}" # Exract extension
   echo "Processing file $FILE..."
   mv $FILE $FILE.bak || exit 1
+  # # TODO: Replace only first occurence of `version`
+  # if [ "$FILE" == "package-lock.json" ]; then # package-lock.json
+  #   cat $FILE.bak \
+  #     | sed -z "s/\(\"version\":\) \".*\"/\1 \"$VERSION\"/" \
+  #   > $FILE || exit 1
   if [ "$EXT" == "json" ]; then # JSON
     cat $FILE.bak \
       | sed "s/\(\"version\":\) \".*\"/\1 \"$VERSION\"/" \
@@ -54,6 +59,7 @@ function UPDATE_FILE() {
   rm $FILE.bak || exit 1
 }
 
+UPDATE_FILE "package-lock.json"
 UPDATE_FILE ".env.local"
 UPDATE_FILE "package.json"
 UPDATE_FILE "README.md"
