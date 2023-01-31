@@ -8,7 +8,7 @@
 
 // Date/time formats for use in DatePicker and other date/time-related
 // components, @see: https://date-fns.org/v2.16.1/docs/format
-export const dateFormat = 'dd.MM.yyyy';
+export const dateFormat = 'yyyy.MM.dd';
 export const timeFormat = 'HH:mm';
 export const timeSecFormat = 'HH:mm:ss';
 export const timeMsFormat = 'HH:mm:ss:SSS';

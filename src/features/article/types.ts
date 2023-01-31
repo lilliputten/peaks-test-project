@@ -5,13 +5,7 @@
 
 import { PayloadAction } from '@reduxjs/toolkit';
 
-import {
-  TArticle,
-  TArticleCommonParams,
-  TArticleId,
-  TRawArticle,
-  // TRawArticleFields,
-} from '@/core/types';
+import { TArticle, TArticleCommonParams, TArticleId, TRawArticle } from '@/core/types';
 
 export interface TArticleParams {
   id?: TArticleId;

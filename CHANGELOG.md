@@ -1,9 +1,10 @@
 <!--
-@changed 2023.01.31, 23:25
+@changed 2023.02.01, 02:04
 -->
 
 # Changelog
 
+- 2023.02.01, 02:03 -- Date formatting utulities, plain html renderer, plain body formatting styles.
 - 2023.01.31, 23:25 -- Added article view components wrappers, DebugData.
 - 2023.01.31, 22:31 -- Added feature, store and reducers for current article functional (features/article), added article view page (in progress).
 - 2023.01.31, 20:34 -- Added basic ArticleView component. Extracted core typings & constants, moved app core components to `core/app`.

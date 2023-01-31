@@ -11,7 +11,7 @@ import '@/global/global-includes';
 import { store } from '@/core/app/app-store';
 import AppWrapper from '@/core/app/app-wrapper';
 
-import '@/global/styles.scss';
+import '@/global/global-styles.scss';
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   return (

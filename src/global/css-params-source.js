@@ -89,7 +89,7 @@ const cssConfig = {
 
   textColor,
   defaultTextColor: textColor,
-  defaultLinkColor: primaryColor,
+  defaultLinkColor: '#003d9d', // primaryColor,
 
   // Neutral colors...
 

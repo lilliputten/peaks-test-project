@@ -19,3 +19,11 @@ body {
   background-color: $bodyBgColor;
   color: $textColor;
 }
+
+a {
+  color: $defaultLinkColor;
+  text-decoration: none;
+  &:hover {
+    opacity: .8;
+  }
+}

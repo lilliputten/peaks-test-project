@@ -1,25 +1,95 @@
 /** @module ArticleView.module.scss
  *  @since 2023.01.29, 22:45
- *  @changed 2023.01.29, 23:31
+ *  @changed 2023.02.01, 01:14
  */
 
 .container {
   margin: $blockPaddingPx;
 }
 
-.dataItem,
-.dataItemLabel,
-.dataItemValue {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+// DEBUG
+.bodyRow,
+.bookmarksRow,
+.column,
+.contentLayout,
+.dateRow,
+.headlineRow,
+.mainColumn,
+.mediaColumn,
+.row,
+.thumbnailRow,
+.titleRow,
+.DEBUG {
+  // border: 1px solid purple; // DEBUG
+  /*!KEEP*/
 }
 
-.dataItem {
-  margin: 2px 0;
+.contentLayout {
+  display: flex;
+  flex-direction: column;
+  gap: $containerPaddingPx;
 }
-.dataItemLabel {
-  opacity: 0.5;
+
+// Layout geometry...
+
+.thumbnailRow {
+  background-color: $primaryColor;
+  background-color: $neutralColors100;
+  padding: 15px;
 }
-.dataItemValue {
+.thumbnail {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: $containerPaddingPx;
+}
+.row {
+  gap: $containerPaddingPx;
+}
+
+@media (min-width: $breakpointsSmPx) {
+  .contentLayout {
+    // border: 2px solid green; // DEBUG
+  }
+}
+@media (min-width: $breakpointsMdPx) {
+  .contentLayout {
+    // border: 2px solid red; // DEBUG
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .mainColumn {
+    flex: 1;
+  }
+  .mediaColumn {
+    width: 35%;
+  }
+}
+
+// Theming...
+
+.bodyRow {
+  position: relative;
+}
+
+.titleRow,
+.headlineRow {
+  font-family: $titleFont;
+  font-size: $titleFontSizePx;
+}
+
+.bookmarksRow {
+  opacity: .25;
+}
+.dateRow {
+  font-size: $fontSizeSmPx;
+  opacity: .3;
+  font-weight: bold;
+  text-transform: uppercase;
 }
