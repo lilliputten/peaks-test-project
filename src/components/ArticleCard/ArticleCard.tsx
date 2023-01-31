@@ -7,7 +7,7 @@ import React, { useMemo } from 'react';
 import classnames from 'classnames';
 
 import { TArticle, TArticleId } from '@/core/types';
-import { useArticleById } from '@/core/app/app-reducer';
+import { useArticleFromListById } from '@/core/app/app-reducer';
 
 import styles from './ArticleCard.module.scss';
 
@@ -149,6 +149,6 @@ export function ArticleCard(props: TArticleCardProps): JSX.Element {
 // Wrap bare (based on straght data) article renderer with data fetcher by id.
 export function ArticleCardById(props: TArticleByCardProps): JSX.Element {
   const { className, id, cardType = defaultArticleCardType } = props;
-  const article = useArticleById(id) || 'No article data found for id ' + id;
+  const article = useArticleFromListById(id) || 'No article data found for id ' + id;
   return <ArticleCard className={className} cardType={cardType} article={article} />;
 }

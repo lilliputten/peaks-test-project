@@ -3,7 +3,7 @@
  *  @changed 2023.01.31, 16:46
  */
 
-import { TShowFieldsList } from '@/core/types';
+import { TShowFieldsList } from '../types';
 
 // Default options list for `show-fields` parameter (unused items are commented out):
 const defaultFieldsList: TShowFieldsList = [

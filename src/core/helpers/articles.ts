@@ -1,9 +1,9 @@
-/** @module helpers
- *  @since 2023.01.28, 19:17
- *  @changed 2023.01.28, 20:29
+/** @module core/helpers/articles
+ *  @since 2023.01.31, 20:43
+ *  @changed 2023.01.31, 20:43
  */
 
-import { TArticle, TRawArticle } from '@/core/types';
+import { TArticle, TRawArticle } from '../types';
 
 /** Inject optional fields into main data object */
 export function combineArticleData(item: TRawArticle): TArticle {

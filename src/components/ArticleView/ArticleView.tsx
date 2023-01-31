@@ -1,15 +1,17 @@
 /** @module ArticleView
  *  @since 2023.01.29, 22:45
- *  @changed 2023.01.29, 22:45
+ *  @changed 2023.01.31, 22:19
  */
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import classnames from 'classnames';
 
+import { useAppDispatch } from '@/core/app/app-store';
 import { TArticle, TArticleId } from '@/core/types';
-import { useArticleById } from '@/core/app/app-reducer';
+import { useCurrentArticle } from '@/core/app/app-reducer';
 
 import styles from './ArticleView.module.scss';
+import { setCurrentArticleId } from '@/features/article/reducer';
 
 interface TArticleViewByIdProps {
   className?: string;
@@ -63,7 +65,7 @@ export function ArticleView(props: TArticleViewProps): JSX.Element {
   const content = useMemo(() => {
     if (!article) {
       // TODO: Throw an error?
-      return 'No article data passed';
+      return 'No article data found';
     } else if (typeof article === 'string') {
       return article;
     } else {
@@ -80,6 +82,12 @@ export function ArticleView(props: TArticleViewProps): JSX.Element {
 
 export function ArticleViewById(props: TArticleViewByIdProps): JSX.Element {
   const { className, id = '' } = props;
-  const article = useArticleById(id);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setCurrentArticleId(id));
+  }, [id, dispatch]);
+  const article = useCurrentArticle();
   return <ArticleView className={className} article={article} />;
 }
+
+// TODO: Loading state?

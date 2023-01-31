@@ -7,7 +7,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import { useArticles, useLoading, useError } from '@/core/app/app-reducer';
+import { useArticles, useArticlesLoading, useArticlesError } from '@/core/app/app-reducer';
 import { errorToString, TReactContent } from '@/utils';
 import LoaderSplash from '@/ui-elements/LoaderSplash';
 
@@ -23,8 +23,8 @@ export function ArticlesWrapper(props: TArticlesWrapperProps): JSX.Element {
 
   // TODO: Detect end-page scrolling and invoke next articles loading.
 
-  const isLoading = useLoading();
-  const error = useError();
+  const isLoading = useArticlesLoading();
+  const error = useArticlesError();
   const articles = useArticles();
   const isEmpty = !articles.length;
 

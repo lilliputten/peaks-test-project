@@ -1,6 +1,6 @@
 /** @module core/types/articles
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.31, 16:46
+ *  @changed 2023.01.31, 22:30
  */
 
 export interface TArticleCommonParams {
@@ -82,65 +82,3 @@ export interface TRawArticle {
 
 // Extra fields data integrated into resulted article object
 export type TArticle = TRawArticle & TRawArticleFields;
-
-// TODO: Add TSection?
-// @see https://open-platform.theguardian.com/documentation/section
-
-// NOTE: Export sort modes ids (`sortModeIds`) to use in sort control.
-export const sortModeIds = [
-  'newest',
-  'oldest',
-  // 'relevance', // UNUSED!
-] as const;
-// Sort mode type (from ids list)
-export type TSortMode = (typeof sortModeIds)[number];
-
-export interface TArticlesSearchInfo {
-  // NOTE: Indices start with 1, not 0!
-  status: string; // 'ok',
-  userTier: string; // 'developer',
-  total: number; // 1,
-  startIndex: number; // 1,
-  pageSize: number; // 10,
-  currentPage: number; // 1,
-  pages: number; // 1,
-  sortMode: TSortMode; // 'newest',
-}
-
-interface TArticlesSearchQueryResponse extends TArticlesSearchInfo {
-  results: TRawArticle[];
-}
-
-export interface TArticlesSearchQueryResult {
-  response: TArticlesSearchQueryResponse;
-}
-
-export interface TArticlesSearchResult {
-  info: TArticlesSearchInfo;
-  articles: TArticle[];
-}
-export interface TArticleLoadResult {
-  article: TArticle;
-}
-
-interface TArticleLoadQueryResponse {
-  content: TRawArticle;
-}
-export interface TArticleLoadQueryResult {
-  response: TArticleLoadQueryResponse;
-}
-
-export interface TArticleLoadQueryParams {
-  // id: TArticleId; // ID passed in url path! The ID for an item, such as a piece of content, is the path to that item on the site. By replacing the domain with content.guardianapis.com you get the API URL for that piece of content.
-  'show-fields'?: string; // Add fields associated with the content
-  'api-key': string; // The API key used for the query
-}
-export interface TArticlesSearchQueryParams {
-  q?: string; // Request content containing this free text. Supports AND, OR and NOT operators, and exact phrase queries using double quotes.
-  page?: number; // Return only the result set from a particular page Integer e.g. 5
-  'page-size'?: number; // Modify the number of items displayed per page  Integer 1 to 50
-  'order-by'?: TSortMode; // Returns results in the specified order  String  See list below. newest - Default in all other cases. oldest. relevance - Default where q parameter is specified.
-  'show-fields'?: string; // Add fields associated with the content
-  'api-key': string; // The API key used for the query
-}
-

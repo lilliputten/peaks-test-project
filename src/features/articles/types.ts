@@ -1,15 +1,9 @@
 /** @module types
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.31, 16:46
+ *  @changed 2023.01.31, 20:38
  */
 
-import {
-  TArticle,
-  TArticleCommonParams,
-  TArticleId,
-  TRawArticle,
-  // TRawArticleFields,
-} from '@/core/types';
+import { TArticle, TArticleCommonParams, TArticleId, TRawArticle } from '@/core/types';
 
 export interface TArticlesParams {
   query: string;
@@ -20,17 +14,13 @@ export interface TArticlesParams {
 
 // Application-level parameters (will be translated to `TArticlesSearchQueryParams`):
 export type TArticlesSearchParams = Partial<TArticlesParams> & TArticleCommonParams;
-export type TArticleLoadParams = { id: TArticleId } & TArticleCommonParams;
 export interface TArticlesState extends TArticlesParams {
   // Articles list...
   ids: TArticleId[];
   articlesHash: Record<TArticleId, TArticle>;
   articles: TArticle[];
 
-  // // Current article...
-  // currentArticleId?: TArticleId;
-  // currentArticle?: TArticle;
-
+  // State...
   isLoading: boolean;
   error?: Error;
 }
@@ -85,22 +75,7 @@ export interface TArticlesSearchResult {
   info: TArticlesSearchInfo;
   articles: TArticle[];
 }
-export interface TArticleLoadResult {
-  article: TArticle;
-}
 
-interface TArticleLoadQueryResponse {
-  content: TRawArticle;
-}
-export interface TArticleLoadQueryResult {
-  response: TArticleLoadQueryResponse;
-}
-
-export interface TArticleLoadQueryParams {
-  // id: TArticleId; // ID passed in url path! The ID for an item, such as a piece of content, is the path to that item on the site. By replacing the domain with content.guardianapis.com you get the API URL for that piece of content.
-  'show-fields'?: string; // Add fields associated with the content
-  'api-key': string; // The API key used for the query
-}
 export interface TArticlesSearchQueryParams {
   q?: string; // Request content containing this free text. Supports AND, OR and NOT operators, and exact phrase queries using double quotes.
   page?: number; // Return only the result set from a particular page Integer e.g. 5
