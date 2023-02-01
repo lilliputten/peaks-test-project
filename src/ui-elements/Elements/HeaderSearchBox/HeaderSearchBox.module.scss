@@ -47,7 +47,10 @@ $iconSize: 18px;
   border: none;
   background: none;
   outline: none;
-  color: #fff;
+  color: color.adjust(#fff, $alpha: -0.4);
+  &:focus {
+    color: #fff;
+  }
   &::placeholder {
     color: color.adjust(#fff, $alpha: -0.8);
   }
