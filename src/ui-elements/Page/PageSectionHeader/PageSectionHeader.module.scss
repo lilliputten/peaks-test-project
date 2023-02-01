@@ -1,0 +1,27 @@
+/** @module PageSectionHeader.module.scss
+ *  @since 2023.02.01, 18:01
+ *  @changed 2023.02.01, 18:01
+ */
+
+.container {
+  width: 100%;
+  &.padded {
+    padding: $containerPaddingPx;
+    // XXX: Temporary: fix the papdings
+    padding-top: 30px;
+  }
+}
+
+.title {
+  width: 100%;
+  margin: 0 auto;
+  font-family: $titleFont;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 29px;
+}
+.description {
+  width: 100%;
+  margin: 0 auto;
+  opacity: 0.5;
+}

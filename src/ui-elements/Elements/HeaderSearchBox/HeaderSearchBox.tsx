@@ -13,7 +13,7 @@ interface THeaderSearchBoxProps {
   // TODO: Apply search callback
 }
 
-export default function HeaderSearchBox(props: THeaderSearchBoxProps): JSX.Element {
+export function HeaderSearchBox(props: THeaderSearchBoxProps): JSX.Element {
   const { className } = props;
   // TODO: Make a link from logo if not root page.
   return (

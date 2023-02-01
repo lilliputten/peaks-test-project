@@ -9,7 +9,7 @@ import classnames from 'classnames';
 
 import { useArticleLoading, useArticleError } from '@/core/app/app-reducer';
 import { errorToString, TReactContent } from '@/utils';
-import LoaderSplash from '@/ui-elements/LoaderSplash';
+import { LoaderSplash } from '@/ui-elements';
 
 import styles from './ArticleWrapper.module.scss';
 

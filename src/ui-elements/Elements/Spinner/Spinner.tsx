@@ -17,7 +17,7 @@ interface TSpinnerProps {
   color?: TSpinnerColor;
 }
 
-export default function Spinner(props: TSpinnerProps): JSX.Element {
+export function Spinner(props: TSpinnerProps): JSX.Element {
   const { className, size, color } = props;
   const sizeId = size && 'size_' + size;
   const colorId = color && 'color_' + color;

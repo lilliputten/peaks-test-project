@@ -1,21 +1,25 @@
 /** @module IndexPage
  *  @since 2023.01.26, 22:51
- *  @changed 2023.01.30, 19:19
+ *  @changed 2023.02.01, 18:32
  */
 
-import * as siteConfig from '@/config/site';
+// import * as siteConfig from '@/config/site';
 import GenericPageLayout from '@/layout/GenericPageLayout';
 import { WrappedArticleList } from '@/components';
-
-// TODO 2023.01.30, 19:17 -- Use specific frontpage articles list component
-// (task?). Left ArticleList for ordinary search results and bookmarked
-// articles displaying.
+import { PageSectionWrapper, PageSectionHeader } from '@/ui-elements';
+import { subPageTitle } from '@/ui-support/pageUtils';
 
 export default function IndexPage(): JSX.Element {
-  const { title } = siteConfig;
+  // const { title } = siteConfig;
+  const pageTitle = 'Search';
+  const title = subPageTitle(pageTitle);
+  const description = 'Page search component.';
   return (
     <GenericPageLayout title={title} rootPage>
-      <WrappedArticleList />
+      <PageSectionWrapper>
+        <PageSectionHeader title={pageTitle} description={description} padded />
+        <WrappedArticleList />
+      </PageSectionWrapper>
     </GenericPageLayout>
   );
 }

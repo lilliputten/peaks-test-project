@@ -1,0 +1,25 @@
+/** @module PageSectionWrapper.module.scss
+ *  @since 2023.02.01, 18:01
+ *  @changed 2023.02.01, 18:11
+ */
+
+.container {
+  width: 100%;
+  &.padded {
+    padding: $containerPaddingPx;
+  }
+}
+
+.wrapper {
+  width: 100%;
+  // max-width: $wrapperMaxWidthPx;
+  margin: 0 auto;
+  &.flex {
+    display: flex;
+    align-items: stretch;
+    align-content: stretch;
+  }
+  &.flexVertical {
+    flex-direction: column;
+  }
+}

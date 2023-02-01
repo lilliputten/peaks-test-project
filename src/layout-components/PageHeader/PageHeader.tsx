@@ -6,8 +6,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import Panel from '@/ui-elements/Panel';
-import HeaderSearchBox from '@/ui-elements/HeaderSearchBox';
+import { Panel } from '@/ui-elements';
+import { HeaderSearchBox } from '@/ui-elements';
 
 import styles from './PageHeader.module.scss';
 

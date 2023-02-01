@@ -20,7 +20,7 @@ interface TPanelProps {
   padded?: boolean;
 }
 
-export default function Panel(props: TPanelProps): JSX.Element {
+export function Panel(props: TPanelProps): JSX.Element {
   const { tag = 'div', className, wrapperClassName, children, flex, flexVertical, padded } = props;
   const renderProps = {
     className: classnames(className, styles.container, padded && styles.padded),

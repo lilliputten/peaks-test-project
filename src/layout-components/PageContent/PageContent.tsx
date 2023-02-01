@@ -7,7 +7,7 @@ import React from 'react';
 import classnames from 'classnames';
 
 import { TReactContent } from '@/utils/react-types';
-import Panel from '@/ui-elements/Panel';
+import { Panel } from '@/ui-elements';
 
 import styles from './PageContent.module.scss';
 

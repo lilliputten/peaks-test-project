@@ -6,7 +6,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import Spinner, { TSpinnerSize, TSpinnerColor } from '@/ui-elements/Spinner';
+import { Spinner, TSpinnerSize, TSpinnerColor } from '../Spinner';
 
 import styles from './LoaderSplash.module.scss';
 
@@ -23,7 +23,7 @@ interface TLoaderSplashProps {
   mode?: TMode;
 }
 
-export default function LoaderSplash(props: TLoaderSplashProps): JSX.Element {
+export function LoaderSplash(props: TLoaderSplashProps): JSX.Element {
   const { className, spinnerSize, spinnerColor, fullSize, bg, show = true, mode } = props;
   const bgId = bg && ['bg', bg].filter((x) => typeof x === 'string').join('_');
   const resultedClassName = classnames(
