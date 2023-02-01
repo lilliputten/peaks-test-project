@@ -10,7 +10,7 @@ import { TReactContent } from '@/utils/react-types';
 
 import styles from './PageSectionHeader.module.scss';
 
-interface TPageSectionHeaderProps {
+export interface TPageSectionHeaderProps {
   title?: TReactContent;
   description?: TReactContent;
   children?: TReactContent;
