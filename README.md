@@ -4,8 +4,8 @@
 
 # Peaks nextjs static client app
 
-- Version: 0.0.7
-- Last changes timestamp: 2023.02.01, 22:16
+- Version: 0.0.8
+- Last changes timestamp: 2023.02.02, 01:51
 
 ## Install
 
