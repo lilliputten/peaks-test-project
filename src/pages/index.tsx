@@ -19,8 +19,8 @@ export default function IndexPage(): JSX.Element {
   const title = subPageTitle(pageTitle);
   const description = 'Main page has not implemented yet. Displaying articles list page instead.';
   return (
-    <GenericPageLayout title={title} rootPage>
-      <PageSectionWrapper>
+    <GenericPageLayout title={title}>
+      <PageSectionWrapper flex flexVertical fullSizeFlexChild>
         <PageSectionHeader title={pageTitle} description={description} padded />
         <WrappedArticleList />
       </PageSectionWrapper>

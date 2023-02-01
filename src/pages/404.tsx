@@ -16,7 +16,7 @@ export default function NotFoundPage(): JSX.Element {
   const pageTitle = siteConfig.notFoundTitle;
   const title = subPageTitle(pageTitle);
   return (
-    <GenericPageLayout title={title} rootPage>
+    <GenericPageLayout title={title}>
       <NotFoundSection />
     </GenericPageLayout>
   );

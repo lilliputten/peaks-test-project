@@ -15,8 +15,8 @@ export default function IndexPage(): JSX.Element {
   const title = subPageTitle(pageTitle);
   const description = 'Page search component.';
   return (
-    <GenericPageLayout title={title} rootPage>
-      <PageSectionWrapper>
+    <GenericPageLayout title={title}>
+      <PageSectionWrapper flex flexVertical fullSizeFlexChild>
         <PageSectionHeader title={pageTitle} description={description} padded />
         <WrappedArticleList />
       </PageSectionWrapper>

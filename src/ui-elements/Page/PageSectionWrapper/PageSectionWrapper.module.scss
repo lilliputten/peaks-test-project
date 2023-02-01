@@ -8,6 +8,10 @@
   &.padded {
     padding: $containerPaddingPx;
   }
+  &.fullSizeFlexChild {
+    flex: 1;
+  }
+  display: flex;
 }
 
 .wrapper {

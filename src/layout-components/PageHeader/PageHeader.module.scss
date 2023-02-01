@@ -3,7 +3,7 @@
  *  @changed 2023.01.27, 16:20
  */
 
-.rootPage {
+.isRoot {
   /*!KEEP*/
   // TODO?
 }
@@ -23,7 +23,9 @@
   background-position: left center;
   background-repeat: no-repeat;
   background-size: contain;
-  cursor: pointer;
+  // a& {
+  //   cursor: pointer;
+  // }
 }
 
 .searchBox {

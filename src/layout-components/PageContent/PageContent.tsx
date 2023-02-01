@@ -13,18 +13,13 @@ import styles from './PageContent.module.scss';
 
 interface TPageContentProps {
   className?: string;
-  rootPage?: boolean;
   children?: TReactContent;
 }
 
 export default function PageContent(props: TPageContentProps): JSX.Element {
-  const { children, className, rootPage } = props;
+  const { children, className } = props;
   return (
-    <Panel
-      className={classnames(className, styles.container, rootPage && styles.rootPage)}
-      tag="section"
-      flex
-    >
+    <Panel className={classnames(className, styles.container)} tag="section" flex>
       {children}
     </Panel>
   );

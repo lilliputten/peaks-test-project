@@ -45,8 +45,6 @@ const articlesSlice = createSlice({
       .addCase(
         String(fetchArticlesThunk.fulfilled),
         (state: TArticlesState, action: ArticlesPayloadAction) => {
-          state.isLoading = false;
-          state.error = undefined;
           const { payload } = action;
           const { info, articles } = payload;
           /* // Info data sample (NOTE: Indices start with 1, not 0!):
@@ -81,6 +79,8 @@ const articlesSlice = createSlice({
           state.ids = newIds;
           state.articles = newArticles;
           state.articlesHash = newArticlesHash;
+          state.isLoading = false;
+          state.error = undefined;
         },
       )
       .addCase(

@@ -12,16 +12,9 @@ import styles from './PageFooter.module.scss';
 
 interface TPageFooterProps {
   className?: string;
-  rootPage?: boolean;
 }
 
 export default function PageFooter(props: TPageFooterProps): JSX.Element {
-  const { className, rootPage } = props;
-  return (
-    <Panel
-      className={classnames(className, styles.container, rootPage && styles.rootPage)}
-      tag="footer"
-      flex
-    />
-  );
+  const { className } = props;
+  return <Panel className={classnames(className, styles.container)} tag="footer" flex />;
 }

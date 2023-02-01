@@ -16,13 +16,23 @@ interface TPageSectionWrapperProps {
   children?: TReactContent;
   flex?: boolean;
   flexVertical?: boolean;
+  fullSizeFlexChild?: boolean;
   padded?: boolean;
 }
 
 export function PageSectionWrapper(props: TPageSectionWrapperProps): JSX.Element {
-  const { className, wrapperClassName, children, flex, flexVertical, padded } = props;
+  const { className, wrapperClassName, children, flex, flexVertical, fullSizeFlexChild, padded } =
+    props;
   return (
-    <div className={classnames(className, styles.container, padded && styles.padded)}>
+    <div
+      className={classnames(
+        className,
+        styles.container,
+        padded && styles.padded,
+        flex && styles.flex,
+        fullSizeFlexChild && styles.fullSizeFlexChild,
+      )}
+    >
       <div
         className={classnames(
           wrapperClassName,
