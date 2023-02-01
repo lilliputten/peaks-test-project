@@ -135,11 +135,21 @@ export function ArticleCard(props: TArticleCardProps): JSX.Element {
     return <span className={className}>{article || 'Article data is not defined'}</span>;
   }
   const { id } = article;
-  const href = id && '/article/' + id;
+  const hasLink = !!id;
   const content = <ArticleCardContent article={article} basicCardProps={basicCardProps} />;
-  const attrs = { href, className };
   // Create link or static span element
-  return React.createElement(href ? Link : 'span', attrs, content);
+  if (hasLink) {
+    return (
+      <Link className={className} href={{ pathname: '/article', query: { id } }}>
+        {content}
+      </Link>
+    );
+  } else {
+    return <span className={className}>{content}</span>;
+  }
+  // const href = id && '/article/' + id;
+  // const attrs = { href, className };
+  // return React.createElement(href ? Link : 'span', attrs, content);
 }
 
 export function EmptyArticleCard(props: Omit<TArticleCardProps, 'article'>): JSX.Element {

@@ -1,9 +1,10 @@
 <!--
-@changed 2023.02.02, 04:23
+@changed 2023.02.02, 05:41
 -->
 
 # Changelog
 
+- 2023.02.02, 05:41 -- Pass article id as query parameter insterad slug (for demo server without ssr).
 - 2023.02.02, 04:23 -- Added dynamic scroller component (articles loaded dynamically with user scroll), added workaround for duplicated articles, added empty article card (for case if some articles hasn't loaded).
 - 2023.02.02, 01:46 -- Implemented articles search functionality.
 - 2023.02.01, 21:52 -- Fixed article & article list error sections, imporved wrappers for article & article list components.
