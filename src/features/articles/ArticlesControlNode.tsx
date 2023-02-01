@@ -28,16 +28,6 @@ export function ArticlesControlNode(): null {
   useEffect(() => {
     const needReset =
       memo.query !== query || memo.sortMode !== sortMode || memo.pageSize !== pageSize;
-    /* // DEBUG
-     * console.log('[ArticlesControlNode:Effect]: Essential parameters]', {
-     *   needReset,
-     *   query,
-     *   sortMode,
-     *   pageNo,
-     *   pageSize,
-     *   memo,
-     * });
-     */
     // Call actions...
     if (needReset) {
       dispatch(resetData());

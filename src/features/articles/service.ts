@@ -52,18 +52,6 @@ export async function fetchArticles(
       articles,
       info,
     };
-    /* // DEBUG
-     * console.log('[Search:fetchArticles]: request done', {
-     *   articles,
-     *   results,
-     *   resultData,
-     *   info,
-     *   data,
-     *   url,
-     *   params,
-     *   res,
-     * });
-     */
     return resultData;
   } catch (error) {
     // NOTE: Error type is AxiosError.

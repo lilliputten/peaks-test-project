@@ -14,11 +14,6 @@ type TFetchArticlesThunkParams = TArticlesParams;
 export const fetchArticlesThunk = createAsyncThunk(
   'articles/fetchArticlesThunk',
   async (params: TFetchArticlesThunkParams): Promise<TArticlesSearchResult> => {
-    /* // DEBUG
-     * console.log('[thunks:fetchArticlesThunk]', {
-     *   params,
-     * });
-     */
     return await fetchArticles(params);
   },
 );
@@ -28,12 +23,5 @@ export function fetchArticlesAction(rootStore: Store<RootState>): void {
   const articlesState = rootStore.getState().articles;
   const { query, sortMode, pageNo, pageSize } = articlesState;
   const params: TFetchArticlesThunkParams = { query, sortMode, pageNo, pageSize };
-  /* // DEBUG
-   * console.log('[thunks:fetchArticlesAction]', {
-   *   sortMode,
-   *   params,
-   *   articlesState,
-   * });
-   */
   thunkDispatch(fetchArticlesThunk(params));
 }

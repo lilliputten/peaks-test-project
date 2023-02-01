@@ -8,8 +8,6 @@ import { useRouter } from 'next/router';
 import classnames from 'classnames';
 import Link from 'next/link';
 
-import styles from './NotFoundContent.module.scss';
-
 interface TNotFoundContentProps {
   className?: string;
 }
@@ -22,7 +20,7 @@ function NotFoundContent(props: TNotFoundContentProps): JSX.Element {
     setUrl(router.asPath);
   }, [router]);
   return (
-    <div className={classnames(className, styles.root)}>
+    <div className={classnames(className)}>
       <p>
         Page <u>{url}</u> can not be found on this site.
       </p>

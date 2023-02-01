@@ -22,6 +22,6 @@ export const store = configureStore({
 
 type AppDispatch = typeof store.dispatch;
 
-// TODO: Fix typings?
+// TODO: To fix typings?
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useAppDispatch = (): any => useDispatch<AppDispatch>();

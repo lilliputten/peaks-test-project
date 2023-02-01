@@ -5,14 +5,12 @@
  */
 
 import * as api from './api';
-import * as app from './app';
 import * as build from './build';
 import * as constants from './constants';
 import * as site from './site';
 
 const config = {
   api,
-  app,
   build,
   constants,
   site,

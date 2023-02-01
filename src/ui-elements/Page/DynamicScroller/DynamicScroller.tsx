@@ -21,7 +21,7 @@ interface TWithProps {
 const hasWindow = typeof window !== 'undefined';
 const hasDocument = typeof document !== 'undefined';
 
-// TODO: Move to helpers?
+// TODO: To move to helpers?
 const isNodeScrolledToEnd = (node?: HTMLDivElement | null, gap = 0): boolean => {
   if (!node || !hasWindow) {
     return false;
@@ -60,7 +60,7 @@ export function withDynamicScrollerFabric<P extends JSX.IntrinsicAttributes>(
         const isInside = isNodeScrolledToEnd(node, gap);
         setIsScrolledToEnd(isInside);
       }, [listContainerRef]);
-      // Update state on after loading finished
+      // Update state when loading finished
       useEffect(updateStatus, [isLoading, updateStatus]);
       useEffect(() => {
         if (setParentListContainerRef) {

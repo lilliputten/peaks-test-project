@@ -27,13 +27,6 @@ export function ArticleControlNode(): null {
   // Effect: Update data on essential parameters change
   useEffect(() => {
     const needReset = !currentArticleId && !!memo.id;
-    /* // DEBUG
-     * console.log('[ArticleControlNode:Effect]: Essential parameters]', {
-     *   currentArticleId,
-     *   needReset,
-     *   memo,
-     * });
-     */
     // Call actions...
     if (needReset) {
       dispatch(resetData());

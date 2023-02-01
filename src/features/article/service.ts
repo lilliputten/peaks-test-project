@@ -34,17 +34,6 @@ export async function fetchArticle(srcParams: TArticleLoadParams): Promise<TArti
     const resultData: TArticleLoadResult = {
       article,
     };
-    /* // DEBUG
-     * console.log('[Search:fetchArticle]: request done', {
-     *   article,
-     *   content,
-     *   resultData,
-     *   data,
-     *   url,
-     *   params,
-     *   res,
-     * });
-     */
     return resultData;
   } catch (error) {
     // NOTE: Error type is AxiosError.

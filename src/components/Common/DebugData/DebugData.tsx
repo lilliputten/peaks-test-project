@@ -17,7 +17,6 @@ interface TDebugDataProps extends JSX.IntrinsicAttributes {
   data?: TData | string;
 }
 
-// DEBUG!
 interface DebugDataItemProps {
   id: string;
   value?: string | number | boolean;
@@ -37,7 +36,6 @@ interface TDebugDataContentProps {
 
 function DebugDataContent({ data }: TDebugDataContentProps): JSX.Element {
   const { id } = data;
-  // DEBUG: Display only data properties
   const keys = data && (Object.keys(data) as string[]);
   const items =
     keys &&
@@ -45,13 +43,6 @@ function DebugDataContent({ data }: TDebugDataContentProps): JSX.Element {
       const value = data[key as keyof TData] as string | boolean | number | undefined;
       return !!value && <DebugDataItem key={id + ':' + key} id={key} value={value} />;
     });
-  /* // DEBUG
-   * console.log('[DebugData:DEBUG]', {
-   *   items,
-   *   keys,
-   *   data,
-   * });
-   */
   return <>{items}</>;
 }
 

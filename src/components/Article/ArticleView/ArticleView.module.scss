@@ -12,23 +12,6 @@
   margin-bottom: 0;
 }
 
-// DEBUG
-.bodyRow,
-.bookmarksRow,
-.column,
-.contentLayout,
-.dateRow,
-.headlineRow,
-.mainColumn,
-.mediaColumn,
-.row,
-.thumbnailRow,
-.titleRow,
-.DEBUG {
-  // border: 1px solid purple; // DEBUG
-  /*!KEEP*/
-}
-
 .contentLayout {
   display: flex;
   flex-direction: column;

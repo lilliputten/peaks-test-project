@@ -7,8 +7,6 @@ import React from 'react';
 import classnames from 'classnames';
 import NotFoundContent from '../Content/NotFoundContent';
 
-import styles from './NotFoundSection.module.scss';
-
 interface TNotFoundSectionProps {
   className?: string;
 }
@@ -17,7 +15,7 @@ export default function NotFoundSection(props: TNotFoundSectionProps): JSX.Eleme
   const { className } = props;
   // TODO: Wrap with section, title etc...
   return (
-    <div className={classnames(className, styles.root)}>
+    <div className={classnames(className)}>
       <NotFoundContent />
     </div>
   );

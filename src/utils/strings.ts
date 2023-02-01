@@ -101,7 +101,6 @@ export const html2string = (html: string): string => {
   return (
     html &&
     html // Process error from (html) response body
-      // .replace(/\s*<head>[\s\S]*<\/head>/m, '')
       .replace(/\s*<style>[\s\S]*<\/style>/gm, '')
       .replace(/<title>(.+)<\/title>/gi, '$1:\n')
       .replace(/<[^<>]*>/g, ' ')
@@ -110,7 +109,6 @@ export const html2string = (html: string): string => {
       .replace(/\n[ \t]+/gm, '\n') // Hanged spaces
       .replace(/\n{3,}/gm, '\n\n') // Extra newlines
       .replace(/\n(.+):*[ \t\n]+\1\n/gm, '\n$1:\n') // Remove repeating titles
-      // .replace(/\n/gm, '\\n') // DEBUG: newlines
       .trim()
   ); // Trim
 };

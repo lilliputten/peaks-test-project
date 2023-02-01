@@ -101,7 +101,6 @@ const articlesSlice = createSlice({
           state.articlesHash = newArticlesHash;
           state.isLoading = false;
           state.error = undefined;
-          // state.error = new Error('Test error'); // DEBUG
         },
       )
       .addCase(
