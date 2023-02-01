@@ -17,7 +17,7 @@ export default function ViewArticlePage(): JSX.Element {
   const pageTitle = useCurrentArticleTitle();
   const title = subPageTitle(pageTitle);
   return (
-    <GenericPageLayout title={title} rootPage>
+    <GenericPageLayout title={title}>
       <WrappedArticleViewById id={id} />
     </GenericPageLayout>
   );

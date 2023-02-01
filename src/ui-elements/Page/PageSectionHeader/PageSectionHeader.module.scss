@@ -5,23 +5,23 @@
 
 .container {
   width: 100%;
+  box-sizing: border-box;
   &.padded {
     padding: $containerPaddingPx;
-    // XXX: Temporary: fix the papdings
-    padding-top: 30px;
   }
 }
 
+.description,
 .title {
-  width: 100%;
-  margin: 0 auto;
+  margin: $itemPaddingPx auto;
+}
+
+.title {
   font-family: $titleFont;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 29px;
+  font-size: 48px;
 }
 .description {
-  width: 100%;
-  margin: 0 auto;
   opacity: 0.5;
+  font-family: $titleFont;
+  font-size: $fontSizeLg;
 }

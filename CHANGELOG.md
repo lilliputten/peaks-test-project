@@ -1,9 +1,10 @@
 <!--
-@changed 2023.02.01, 19:39
+@changed 2023.02.01, 21:52
 -->
 
 # Changelog
 
+- 2023.02.01, 21:52 -- Fixed article & article list error sections, imporved wrappers for article & article list components.
 - 2023.02.01, 19:39 -- Updated layout, added withRouterProps HOC, other minor changes.
 - 2023.02.01, 16:51 -- Added links to articles card from list.
 - 2023.02.01, 02:03 -- Date formatting utulities, plain html renderer, plain body formatting styles.

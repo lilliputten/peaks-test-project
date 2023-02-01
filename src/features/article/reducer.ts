@@ -45,6 +45,7 @@ const articleSlice = createSlice({
           state.currentArticle = article;
           state.isLoading = false;
           state.error = undefined;
+          // state.error = new Error('Test error'); // DEBUG
         },
       )
       .addCase(

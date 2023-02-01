@@ -15,7 +15,7 @@ import { subPageTitle } from '@/ui-support/pageUtils';
 
 export default function IndexPage(): JSX.Element {
   // const { title } = siteConfig;
-  const pageTitle = 'Main page';
+  const pageTitle = 'Top stories';
   const title = subPageTitle(pageTitle);
   const description = 'Main page has not implemented yet. Displaying articles list page instead.';
   return (

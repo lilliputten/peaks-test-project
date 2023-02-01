@@ -7,6 +7,11 @@
   margin: $blockPaddingPx;
 }
 
+.errorSection {
+  margin: $blockPaddingPx;
+  margin-bottom: 0;
+}
+
 // DEBUG
 .bodyRow,
 .bookmarksRow,
@@ -50,17 +55,19 @@
   gap: $containerPaddingPx;
 }
 .row {
+  margin: 0;
   gap: $containerPaddingPx;
 }
 
 @media (min-width: $breakpointsSmPx) {
-  .contentLayout {
-    // border: 2px solid green; // DEBUG
+  // .contentLayout {
+  // }
+  .thumbnail {
+    height: 300px;
   }
 }
 @media (min-width: $breakpointsMdPx) {
   .contentLayout {
-    // border: 2px solid red; // DEBUG
     display: flex;
     flex-direction: row-reverse;
   }
@@ -69,6 +76,9 @@
   }
   .mediaColumn {
     width: 35%;
+  }
+  .thumbnail {
+    // height: 350px;
   }
 }
 
@@ -81,7 +91,13 @@
 .titleRow,
 .headlineRow {
   font-family: $titleFont;
-  font-size: $titleFontSizePx;
+}
+.titleRow {
+  font-size: 34px;
+  font-weight: bold;
+}
+.headlineRow {
+  font-size: 20px;
 }
 
 .bookmarksRow {

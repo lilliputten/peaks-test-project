@@ -1,6 +1,6 @@
 /** @module ArticleView
  *  @since 2023.01.29, 22:45
- *  @changed 2023.01.31, 23:06
+ *  @changed 2023.02.01, 21:43
  */
 
 import React, { useEffect, useMemo } from 'react';
@@ -10,28 +10,29 @@ import { useAppDispatch } from '@/core/app/app-store';
 import { TArticle, TArticleId } from '@/core/types';
 import { useCurrentArticle } from '@/core/app/app-reducer';
 import { setCurrentArticleId } from '@/features/article/reducer';
-import { withArticleWrapper } from '../ArticleWrapper';
+import { TWithArticleWrapperProps, withArticleWrapperFabric } from '../ArticleWrapper';
 
-// import { DebugData } from '@/components/Common/DebugData/DebugData';
 import { PlainHtmlBody } from '@/components/Common';
 
 import styles from './ArticleView.module.scss';
 import { formatIsoDateString } from '@/utils';
 
-interface TArticleViewByIdProps extends JSX.IntrinsicAttributes {
+interface TArticleViewByIdProps extends TWithArticleWrapperProps {
   className?: string;
   id?: TArticleId;
 }
-interface TArticleViewWithDataProps extends JSX.IntrinsicAttributes {
+interface TArticleViewWithDataProps extends TWithArticleWrapperProps {
   className?: string;
   article?: TArticle | string;
 }
 
 // TODO?
-interface TArticleViewContentProps {
+interface TArticleViewContentProps extends TWithArticleWrapperProps {
   article: TArticle;
+  // error?: Error;
+  // isLoading?: boolean;
 }
-function ArticleViewContent({ article }: TArticleViewContentProps): JSX.Element {
+function ArticleViewContent({ article /* , error */ }: TArticleViewContentProps): JSX.Element {
   const {
     // id,
     webPublicationDate,
@@ -40,16 +41,6 @@ function ArticleViewContent({ article }: TArticleViewContentProps): JSX.Element 
     thumbnail,
     body,
   } = article;
-  /* // DEBUG
-   * console.log('[ArticleView:ArticleViewContent]', {
-   *   id,
-   *   webPublicationDate,
-   *   webTitle,
-   *   headline,
-   *   thumbnail,
-   *   article,
-   * });
-   */
   const hasThumbnail = !!thumbnail;
   const thumbnailStyle = hasThumbnail && { backgroundImage: 'url(' + thumbnail + ')' };
   return (
@@ -70,8 +61,8 @@ function ArticleViewContent({ article }: TArticleViewContentProps): JSX.Element 
             {formatIsoDateString(webPublicationDate)}
           </div>
         )}
-        {webTitle && <div className={classnames(styles.row, styles.titleRow)}>{webTitle}</div>}
-        {headline && <div className={classnames(styles.row, styles.headlineRow)}>{headline}</div>}
+        {webTitle && <h1 className={classnames(styles.row, styles.titleRow)}>{webTitle}</h1>}
+        {headline && <h2 className={classnames(styles.row, styles.headlineRow)}>{headline}</h2>}
         {body && <PlainHtmlBody className={classnames(styles.row, styles.bodyRow)} body={body} />}
       </div>
     </div>
@@ -79,7 +70,12 @@ function ArticleViewContent({ article }: TArticleViewContentProps): JSX.Element 
 }
 
 export function ArticleViewWithData(props: TArticleViewWithDataProps): JSX.Element {
-  const { className, article } = props;
+  const {
+    className,
+    article,
+    error,
+    // isLoading,
+  } = props;
   const content = useMemo(() => {
     if (!article) {
       // TODO: Throw an error?
@@ -87,10 +83,9 @@ export function ArticleViewWithData(props: TArticleViewWithDataProps): JSX.Eleme
     } else if (typeof article === 'string') {
       return article;
     } else {
-      // return <DebugData data={article} />; // DEBUG
-      return <ArticleViewContent article={article} />;
+      return <ArticleViewContent article={article} error={error} />;
     }
-  }, [article]);
+  }, [article, error]);
   /* // Sample article data:
    * id: sport/live/2023/jan/28/elena-rybakina-v-aryna-sabalenka-australian-open-womens-singles-final-live
    * type: liveblog
@@ -118,16 +113,20 @@ export function ArticleViewWithData(props: TArticleViewWithDataProps): JSX.Eleme
 }
 
 export function ArticleViewById(props: TArticleViewByIdProps): JSX.Element {
-  const { className, id = '' } = props;
+  const { className, id = '', error } = props;
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(setCurrentArticleId(id));
   }, [id, dispatch]);
   const article = useCurrentArticle();
-  return <ArticleViewWithData className={className} article={article} />;
+  return <ArticleViewWithData className={className} article={article} error={error} />;
 }
 
 // Export wrapped versions
-export const WrappedArticleViewById = withArticleWrapper<TArticleViewByIdProps>(ArticleViewById);
+const wrapperParams = {
+  errorClassName: styles.errorSection,
+};
+export const WrappedArticleViewById =
+  withArticleWrapperFabric<TArticleViewByIdProps>(wrapperParams)(ArticleViewById);
 export const WrappedArticleViewWithData =
-  withArticleWrapper<TArticleViewWithDataProps>(ArticleViewWithData);
+  withArticleWrapperFabric<TArticleViewWithDataProps>(wrapperParams)(ArticleViewWithData);

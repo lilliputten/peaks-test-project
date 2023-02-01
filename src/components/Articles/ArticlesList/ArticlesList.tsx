@@ -1,6 +1,6 @@
 /** @module ArticlesList
  *  @since 2023.01.27, 19:57
- *  @changed 2023.01.30, 19:24
+ *  @changed 2023.02.01, 21:49
  */
 
 import React, { useMemo } from 'react';
@@ -8,11 +8,11 @@ import classnames from 'classnames';
 
 import { useArticles } from '@/core/app/app-reducer';
 import { ArticleCardById } from '../ArticleCard';
-import { withArticlesWrapper } from '../ArticlesWrapper';
+import { TWithArticlesWrapperProps, withArticlesWrapperFabric } from '../ArticlesWrapper';
 
 import styles from './ArticlesList.module.scss';
 
-interface TArticlesListProps extends JSX.IntrinsicAttributes {
+interface TArticlesListProps extends TWithArticlesWrapperProps {
   className?: string;
 }
 
@@ -43,4 +43,9 @@ export function ArticlesList(props: TArticlesListProps): JSX.Element {
 }
 
 // Export wrapped version
-export const WrappedArticleList = withArticlesWrapper<TArticlesListProps>(ArticlesList);
+const wrapperParams = {
+  errorClassName: styles.errorSection,
+  wrapperClassName: styles.outerWrapper,
+};
+export const WrappedArticleList =
+  withArticlesWrapperFabric<TArticlesListProps>(wrapperParams)(ArticlesList);

@@ -109,7 +109,7 @@ const cssConfig = {
 
   bodyBgColor: theme.bodyBgColor || '#fff',
 
-  /* // Generic theming colors...
+  /* // UNUSED: Generic theming colors...
    * themeColors: {
    *   // ??? TODO: See buttons themes
    *   primary: primaryColor,
@@ -170,7 +170,9 @@ const cssConfig = {
   fontSizeLg: defaultFontSize + 2,
   fontSizeXl: defaultFontSize + 4,
   fontSizeXxl: defaultFontSize + 8,
+
   titleFontSize: defaultFontSize + 8,
+
   defaultLineHeight: 1.3,
   defaultFontWeight: 400,
   lightFontWeight: 300,
