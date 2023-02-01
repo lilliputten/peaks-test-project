@@ -1,6 +1,6 @@
 /** @module ArticleCard.module.scss
  *  @since 2023.01.29, 22:45
- *  @changed 2023.01.31, 00:24
+ *  @changed 2023.02.01, 16:50
  */
 
 // Constants...
@@ -23,6 +23,13 @@ $colorBarSizePx: 3px;
   // Geometry...
   margin: $containerPaddingPx;
   overflow: hidden;
+
+  transition: opacity $transitionTimeMs, box-shadow $transitionTimeMs;
+  $shadowColor: color.adjust($primaryColor, $alpha: -.7);
+  &:hover {
+    box-shadow: 0 0 5px 2px $shadowColor;
+    opacity: 0.9;
+  }
 }
 
 // Basic details styles...

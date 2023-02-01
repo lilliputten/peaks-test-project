@@ -1,9 +1,10 @@
 <!--
-@changed 2023.02.01, 02:04
+@changed 2023.02.01, 16:51
 -->
 
 # Changelog
 
+- 2023.02.01, 16:51 -- Added links to articles card from list.
 - 2023.02.01, 02:03 -- Date formatting utulities, plain html renderer, plain body formatting styles.
 - 2023.01.31, 23:25 -- Added article view components wrappers, DebugData.
 - 2023.01.31, 22:31 -- Added feature, store and reducers for current article functional (features/article), added article view page (in progress).

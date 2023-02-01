@@ -1,9 +1,10 @@
 /** @module ArticleCard
  *  @since 2023.01.29, 22:45
- *  @changed 2023.01.30, 20:56
+ *  @changed 2023.02.01, 16:50
  */
 
-import React, { useMemo } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import classnames from 'classnames';
 
 import { TArticle, TArticleId } from '@/core/types';
@@ -60,7 +61,7 @@ function ArticleCardThumbnail({ article }: TArticleCardDetailsProps): JSX.Elemen
   const url = noImage ? defaultThumbnailUrl : thumbnail;
   const className = classnames(styles.thumbnail, noImage && styles.thumbnailNoImage);
   const style = { backgroundImage: 'url(' + url + ')' };
-  return <div className={className} style={style} />;
+  return <span className={className} style={style} />;
 }
 
 function ArticleCardText({ article, basicCardProps }: TArticleCardDetailsProps): JSX.Element {
@@ -95,10 +96,10 @@ function ArticleCardText({ article, basicCardProps }: TArticleCardDetailsProps):
       .replace(/\s\s+/g, ' ')
       .trim();
   return (
-    <div className={className}>
-      <div className={styles.textTitle}>{webTitle}</div>
-      {showBody && <div className={styles.textBody}>{bodyPlain}</div>}
-    </div>
+    <span className={className}>
+      <span className={styles.textTitle}>{webTitle}</span>
+      {showBody && <span className={styles.textBody}>{bodyPlain}</span>}
+    </span>
   );
 }
 
@@ -111,7 +112,7 @@ function ArticleCardContent({ article, basicCardProps }: TArticleCardDetailsProp
       {hasThumbnail && <ArticleCardThumbnail article={article} basicCardProps={basicCardProps} />}
       <ArticleCardText article={article} basicCardProps={basicCardProps} />
       {/* TODO: To fetch and pass parameters to customize color bar color (Using `ArticleCardColorBar` component)? */}
-      <div className={styles.colorBar} />
+      <span className={styles.colorBar} />
     </>
   );
 }
@@ -127,23 +128,18 @@ interface TArticleByCardProps extends TBasicDetailsProps {
 }
 
 export function ArticleCard(props: TArticleCardProps): JSX.Element {
-  const { className, article, ...basicCardProps } = props;
+  const { className: passedClassName, article, ...basicCardProps } = props;
   const { cardType = defaultArticleCardType } = basicCardProps;
-  const content = useMemo(() => {
-    if (!article) {
-      // TODO: Throw an error? Display empty block?
-      return 'Article data is not defined';
-    } else if (typeof article === 'string') {
-      return article;
-    } else {
-      return <ArticleCardContent article={article} basicCardProps={basicCardProps} />;
-    }
-  }, [article, basicCardProps]);
-  return (
-    <div className={classnames(className, styles.container, styles['cardType_' + cardType])}>
-      {content}
-    </div>
-  );
+  const className = classnames(passedClassName, styles.container, styles['cardType_' + cardType]);
+  if (!article || typeof article === 'string') {
+    return <span className={className}>{article || 'Article data is not defined'}</span>;
+  }
+  const { id } = article;
+  const href = id && '/article/' + id;
+  const content = <ArticleCardContent article={article} basicCardProps={basicCardProps} />;
+  const attrs = { href, className };
+  // Create link or static span element
+  return React.createElement(href ? Link : 'span', attrs, content);
 }
 
 // Wrap bare (based on straght data) article renderer with data fetcher by id.
