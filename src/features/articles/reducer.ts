@@ -16,6 +16,9 @@ const articlesSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
+    setQuery: (state, action: PayloadAction<string>) => {
+      state.query = action.payload;
+    },
     setSortMode: (state, action: PayloadAction<TSortMode>) => {
       state.sortMode = action.payload;
     },
@@ -59,13 +62,6 @@ const articlesSlice = createSlice({
            */
           const { startIndex } = info;
           const start = startIndex - 1; // NOTE: Indices start with 1, not 0!
-          /* // DEBUG
-           * console.log('[features/articles/reducer:fetchArticlesThunk.fulfilled]', {
-           *   info,
-           *   articles,
-           *   // meta,
-           * });
-           */
           const newIds = [...state.ids];
           const newArticles = [...state.articles];
           const newArticlesHash = { ...state.articlesHash };
@@ -117,6 +113,6 @@ export const selectParams = (state: TArticlesState): TArticlesParams => {
   return { query, sortMode, pageNo, pageSize };
 };
 
-export const { setSortMode, setPageNo, setPageSize, resetData } = articlesSlice.actions;
+export const { setQuery, setSortMode, setPageNo, setPageSize, resetData } = articlesSlice.actions;
 
 export const articlesReducer = articlesSlice.reducer;

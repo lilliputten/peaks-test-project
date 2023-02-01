@@ -8,7 +8,7 @@ import { useEffect, useMemo } from 'react';
 import { useStore } from 'react-redux';
 
 import { useAppDispatch } from '@/core/app/app-store';
-import { useParams, RootState } from '@/core/app/app-reducer';
+import { useArticlesSearchParams, RootState } from '@/core/app/app-reducer';
 import { defaultParams } from '@/features/articles/constants'; // NOTE: Temporaily trick: Avoiding cycling imports
 import { TArticlesParams, fetchArticlesAction } from '@/features/articles';
 import { resetData } from '@/features/articles/reducer';
@@ -20,7 +20,7 @@ export function ArticlesControlNode(): null {
   const dispatch = useAppDispatch();
   const appStateStore = useStore<RootState>();
 
-  const { query, sortMode, pageNo, pageSize } = useParams();
+  const { query, sortMode, pageNo, pageSize } = useArticlesSearchParams();
 
   const memo = useMemo<TMemo>(() => ({ ...defaultMemo }), []);
 

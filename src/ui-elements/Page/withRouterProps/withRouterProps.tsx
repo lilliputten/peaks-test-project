@@ -5,22 +5,26 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 
 export interface TWithRouterProps {
-  isRoot: boolean | undefined;
+  routerRoot: boolean | undefined;
+  routerPath: string | undefined;
+  router: NextRouter;
 }
 export function withRouterProps<P extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<P & TWithRouterProps>,
 ) {
   return function WithRouterProps(props: P) {
     const router = useRouter();
-    const [isRoot, setIsRoot] = useState<TWithRouterProps['isRoot']>();
+    const [routerRoot, setRouterRoot] = useState<TWithRouterProps['routerRoot']>();
+    const [routerPath, setRouterPath] = useState<TWithRouterProps['routerPath']>();
     useEffect(() => {
-      const url = router.asPath;
-      const isRoot = !url || url === '/';
-      setIsRoot(isRoot);
+      const { asPath } = router;
+      const routerRoot = !asPath || asPath === '/';
+      setRouterPath(asPath);
+      setRouterRoot(routerRoot);
     }, [router]);
-    return <Component {...props} isRoot={isRoot} />;
+    return <Component {...props} routerRoot={routerRoot} routerPath={routerPath} router={router} />;
   };
 }

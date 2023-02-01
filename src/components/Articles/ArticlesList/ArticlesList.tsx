@@ -1,6 +1,6 @@
 /** @module ArticlesList
  *  @since 2023.01.27, 19:57
- *  @changed 2023.02.01, 21:49
+ *  @changed 2023.02.02, 01:34
  */
 
 import React, { useMemo } from 'react';
@@ -16,9 +16,6 @@ interface TArticlesListProps extends TWithArticlesWrapperProps {
   className?: string;
 }
 
-// TODO 2023.01.30, 19:23 -- Receive article ids list top display (and display
-// all available articles if this list is omited).
-
 export function ArticlesList(props: TArticlesListProps): JSX.Element {
   const { className } = props;
 
@@ -27,6 +24,9 @@ export function ArticlesList(props: TArticlesListProps): JSX.Element {
   const articles = useArticles();
 
   const content = useMemo(() => {
+    if (!articles.length) {
+      return <div className={styles.messageSection}>No articles found.</div>;
+    }
     return articles.map(({ id }) => (
       <ArticleCardById
         // cardType="large"

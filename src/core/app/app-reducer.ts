@@ -38,7 +38,7 @@ export const useArticleFromListById = (
   id: TArticleId,
 ): ReturnType<typeof articlesReducer.selectArticleById> =>
   articlesReducer.selectArticleById(useArticlesState(), id);
-export const useParams = (): ReturnType<typeof articlesReducer.selectParams> =>
+export const useArticlesSearchParams = (): ReturnType<typeof articlesReducer.selectParams> =>
   articlesReducer.selectParams(useArticlesState());
 
 // Article reducers...
