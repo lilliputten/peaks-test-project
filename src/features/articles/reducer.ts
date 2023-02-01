@@ -12,6 +12,15 @@ import { fetchArticlesThunk } from './thunks';
 
 type ArticlesPayloadAction = PayloadAction<TArticlesSearchResult, string, unknown, Error>;
 
+function getUniqueArticleId(ids: TArticleId[], id: TArticleId): TArticleId {
+  let newId = id;
+  let count = 0;
+  while (ids.includes(newId)) {
+    newId = id + '-DUP-' + ++count;
+  }
+  return newId;
+}
+
 const articlesSlice = createSlice({
   name: 'articles',
   initialState,
@@ -24,6 +33,9 @@ const articlesSlice = createSlice({
     },
     setPageNo: (state, action: PayloadAction<number>) => {
       state.pageNo = action.payload;
+    },
+    setNextPage: (state) => {
+      state.pageNo = state.pageNo + 1;
     },
     setPageSize: (state, action: PayloadAction<number>) => {
       state.pageSize = action.payload;
@@ -68,6 +80,18 @@ const articlesSlice = createSlice({
           for (let i = 0; i < articles.length; i++) {
             const article = articles[i];
             const { id } = article;
+            if (newIds.includes(id)) {
+              // NOTE: Sometimes one article may appear several times in one
+              // list (especially we fetching it with delayed chunks).
+              const uniqueId = getUniqueArticleId(newIds, id);
+              article.uniqueId = uniqueId;
+              // eslint-disable-next-line no-console
+              console.warn('[articles/reducer:fetchArticlesThunk.fulfilled]: duplicated id', {
+                id,
+                uniqueId,
+              });
+            }
+            // TODO: Check for duplicate items?
             newIds[start + i] = id;
             newArticles[start + i] = article;
             newArticlesHash[id] = article;
@@ -113,6 +137,7 @@ export const selectParams = (state: TArticlesState): TArticlesParams => {
   return { query, sortMode, pageNo, pageSize };
 };
 
-export const { setQuery, setSortMode, setPageNo, setPageSize, resetData } = articlesSlice.actions;
+export const { setQuery, setSortMode, setPageNo, setNextPage, setPageSize, resetData } =
+  articlesSlice.actions;
 
 export const articlesReducer = articlesSlice.reducer;

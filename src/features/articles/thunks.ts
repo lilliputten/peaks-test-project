@@ -10,10 +10,6 @@ import { fetchArticles } from './service';
 import { RootState } from '@/core/app/app-reducer';
 
 type TFetchArticlesThunkParams = TArticlesParams;
-// type TFetchArticlesThunkParams = Pick<
-//   TArticlesState,
-//   'query' | 'sortMode' | 'pageNo' | 'pageSize'
-// >;
 
 export const fetchArticlesThunk = createAsyncThunk(
   'articles/fetchArticlesThunk',

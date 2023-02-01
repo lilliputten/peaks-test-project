@@ -13,11 +13,6 @@ import { LoaderSplash } from '@/ui-elements';
 
 import styles from './ArticleWrapper.module.scss';
 
-/* // Empty interface (?)
- * interface TWithProps {
- * }
- */
-
 export interface TWithArticleWrapperParams {
   wrapperClassName?: string;
   errorClassName?: string;
@@ -31,14 +26,10 @@ export interface TWithArticleWrapperProps extends JSX.IntrinsicAttributes {
 
 export function withArticleWrapperFabric<P extends JSX.IntrinsicAttributes>(
   params: TWithArticleWrapperParams,
-): (
-  Component: React.ComponentType<P & TWithArticleWrapperProps>,
-) => (props: P /* & TWithProps */) => JSX.Element {
+): (Component: React.ComponentType<P & TWithArticleWrapperProps>) => (props: P) => JSX.Element {
   const { wrapperClassName, errorClassName, showErrorInWrapper = true } = params;
-  return function withArticleWrapperFabric(
-    Component: React.ComponentType<P & TWithArticleWrapperProps>,
-  ) {
-    return function ArticleWrapper(props: P /* & TWithProps */) {
+  return function withArticleWrapper(Component: React.ComponentType<P & TWithArticleWrapperProps>) {
+    return function ArticleWrapper(props: P) {
       const error = useArticleError();
       const isLoading = useArticleLoading();
       return (

@@ -81,4 +81,4 @@ export interface TRawArticle {
 }
 
 // Extra fields data integrated into resulted article object
-export type TArticle = TRawArticle & TRawArticleFields;
+export type TArticle = TRawArticle & TRawArticleFields & { uniqueId?: TArticleId };

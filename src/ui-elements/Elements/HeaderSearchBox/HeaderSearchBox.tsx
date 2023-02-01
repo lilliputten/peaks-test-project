@@ -1,12 +1,12 @@
 /** @module HeaderSearchBox
  *  @since 2023.01.27, 17:33
- *  @changed 2023.02.02, 01:42
+ *  @changed 2023.02.02, 02:05
  */
+
+// TODO 2023.02.02, 02:05 -- To capture ESC keypress?
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classnames from 'classnames';
-
-// import { setQuery } from '@/features/articles/reducer';
 
 import styles from './HeaderSearchBox.module.scss';
 
@@ -21,6 +21,8 @@ interface TMemo {
   text: string;
   query: string;
 }
+
+const hasDocument = typeof document !== 'undefined';
 
 export function HeaderSearchBox(props: THeaderSearchBoxProps): JSX.Element {
   const { className, query, setQuery } = props;
@@ -51,14 +53,14 @@ export function HeaderSearchBox(props: THeaderSearchBoxProps): JSX.Element {
   useEffect(() => {
     const prevShow = memo.show;
     memo.show = show;
-    if (show && !prevShow) {
+    if (show && !prevShow && hasDocument) {
       // Register callback on body
       setTimeout(() => {
         // Delay for avoid instant handler invoking
-        document.body.addEventListener('click', onOutsideClick);
+        document.addEventListener('click', onOutsideClick);
       }, 0);
       return () => {
-        document.body.removeEventListener('click', onOutsideClick);
+        document.removeEventListener('click', onOutsideClick);
       };
     }
     memo.show = show;

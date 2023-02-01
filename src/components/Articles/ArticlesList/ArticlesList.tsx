@@ -1,25 +1,50 @@
 /** @module ArticlesList
  *  @since 2023.01.27, 19:57
- *  @changed 2023.02.02, 01:34
+ *  @changed 2023.02.02, 03:36
  */
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { compose } from 'redux';
 import classnames from 'classnames';
 
 import { useArticles } from '@/core/app/app-reducer';
-import { ArticleCardById } from '../ArticleCard';
+import { TWithDynamicScrollerProps, withDynamicScrollerFabric } from '@/ui-elements';
+import { setNextPage } from '@/features/articles/reducer';
+import { ArticleCardById, EmptyArticleCard } from '../ArticleCard';
 import { TWithArticlesWrapperProps, withArticlesWrapperFabric } from '../ArticlesWrapper';
 
 import styles from './ArticlesList.module.scss';
+import { useAppDispatch } from '@/core';
 
-interface TArticlesListProps extends TWithArticlesWrapperProps {
+interface TArticlesListProps extends TWithArticlesWrapperProps, TWithDynamicScrollerProps {
   className?: string;
+  setListContainerRef?: (ref: React.RefObject<HTMLDivElement> | null) => void;
 }
 
 export function ArticlesList(props: TArticlesListProps): JSX.Element {
-  const { className } = props;
+  const { className, isLoading, isScrolledToEnd, setListContainerRef } = props;
+  const ref = useRef<HTMLDivElement>(null);
 
-  // TODO: Detect end-page scrolling and invoke next articles loading. (To do it in the wrapper?)
+  // TODO: To make card type selectable (for demo purposes)
+  // const cardType = 'large';
+  // const cardType = 'smallText';
+  // const cardType = 'small';
+  const cardType = 'medium';
+
+  useEffect(() => {
+    if (setListContainerRef) {
+      setListContainerRef(ref);
+    }
+  }, [ref, setListContainerRef]);
+
+  const dispatch = useAppDispatch();
+
+  // Detecting end-page scrolling and invoke next articles loading.
+  useEffect(() => {
+    if (isScrolledToEnd) {
+      dispatch(setNextPage());
+    }
+  }, [dispatch, isLoading, isScrolledToEnd]);
 
   const articles = useArticles();
 
@@ -27,25 +52,30 @@ export function ArticlesList(props: TArticlesListProps): JSX.Element {
     if (!articles.length) {
       return <div className={styles.messageSection}>No articles found.</div>;
     }
-    return articles.map(({ id }) => (
-      <ArticleCardById
-        // cardType="large"
-        // cardType="smallText"
-        // cardType="small"
-        cardType="medium"
-        key={id}
-        id={id}
-      />
-    ));
+    return articles.map((article, n) => {
+      if (!article) {
+        const key = 'empty-' + n;
+        return <EmptyArticleCard cardType={cardType} key={key} />;
+      }
+      const { id, uniqueId } = article;
+      return <ArticleCardById cardType={cardType} key={uniqueId || id} id={id} />;
+    });
   }, [articles]);
 
-  return <div className={classnames(className, styles.container)}>{content}</div>;
+  return (
+    <div ref={ref} className={classnames(className, styles.container)}>
+      {content}
+    </div>
+  );
 }
 
 // Export wrapped version
-const wrapperParams = {
-  errorClassName: styles.errorSection,
-  wrapperClassName: styles.outerWrapper,
-};
-export const WrappedArticleList =
-  withArticlesWrapperFabric<TArticlesListProps>(wrapperParams)(ArticlesList);
+export const WrappedArticleList = compose<React.FC<TArticlesListProps>>(
+  withArticlesWrapperFabric<TArticlesListProps>({
+    errorClassName: styles.errorSection,
+    wrapperClassName: styles.outerWrapper,
+  }),
+  // NOTE: DynamicScroller should be applied after ArticlesWrapper so
+  // DynamicScroller is expecting isLoading property from ArticlesWrapper.
+  withDynamicScrollerFabric<TArticlesListProps>({ gap: 200 }),
+)(ArticlesList);

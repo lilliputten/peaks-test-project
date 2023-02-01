@@ -1,6 +1,6 @@
 /** @module ArticleCard
  *  @since 2023.01.29, 22:45
- *  @changed 2023.02.01, 16:50
+ *  @changed 2023.02.02, 04:03
  */
 
 import React from 'react';
@@ -140,6 +140,10 @@ export function ArticleCard(props: TArticleCardProps): JSX.Element {
   const attrs = { href, className };
   // Create link or static span element
   return React.createElement(href ? Link : 'span', attrs, content);
+}
+
+export function EmptyArticleCard(props: Omit<TArticleCardProps, 'article'>): JSX.Element {
+  return <ArticleCard {...props} article="" />;
 }
 
 // Wrap bare (based on straght data) article renderer with data fetcher by id.

@@ -1,6 +1,6 @@
 /** @module HeaderSearchBox.module.scss
  *  @since 2023.01.27, 17:33
- *  @changed 2023.02.02, 01:43
+ *  @changed 2023.02.02, 02:05
  */
 
 $iconSize: 18px;
@@ -66,4 +66,8 @@ $iconSize: 18px;
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+  transition: opacity $transitionTimeMs;
+  &:hover {
+    opacity: 0.75;
+  }
 }
