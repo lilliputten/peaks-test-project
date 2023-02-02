@@ -1,8 +1,9 @@
 /** @module types
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.31, 20:38
+ *  @changed 2023.02.02, 08:33
  */
 
+import { TArticleCardType } from '@/components';
 import { TArticle, TArticleCommonParams, TArticleId, TRawArticle } from '@/core/types';
 
 export interface TArticlesParams {
@@ -10,6 +11,8 @@ export interface TArticlesParams {
   sortMode: TSortMode;
   pageNo: number;
   pageSize: number;
+  // DEBUG: Allow to change article preview card type for demonstration purposes.
+  cardType: TArticleCardType;
 }
 
 // Application-level parameters (will be translated to `TArticlesSearchQueryParams`):

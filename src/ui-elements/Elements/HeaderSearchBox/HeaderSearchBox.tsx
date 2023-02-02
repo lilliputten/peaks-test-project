@@ -68,8 +68,10 @@ export function HeaderSearchBox(props: THeaderSearchBoxProps): JSX.Element {
   const onClick = useCallback(
     (ev: React.MouseEvent<HTMLDivElement>) => {
       const { show } = memo;
-      ev.preventDefault();
-      ev.stopPropagation();
+      if (show) {
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
       if (!show) {
         setShow(true);
         if (inputRef?.current) {
@@ -92,7 +94,7 @@ export function HeaderSearchBox(props: THeaderSearchBoxProps): JSX.Element {
   );
   const onSubmit = useCallback(
     (ev?: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLDivElement>) => {
-      ev?.preventDefault();
+      ev?.preventDefault(); // Disable html form submission!
       const { text, show } = memo;
       if (show) {
         setQuery(text);

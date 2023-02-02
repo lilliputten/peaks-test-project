@@ -1,6 +1,6 @@
 /** @module reducer
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.29, 23:23
+ *  @changed 2023.02.02, 08:33
  */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -9,6 +9,7 @@ import { TArticle, TArticleId } from '@/core/types';
 import { TArticlesSearchResult, TSortMode, TArticlesState, TArticlesParams } from './types';
 import { initialState, startPageNo } from './constants';
 import { fetchArticlesThunk } from './thunks';
+import { TArticleCardType } from '@/components';
 
 type ArticlesPayloadAction = PayloadAction<TArticlesSearchResult, string, unknown, Error>;
 
@@ -39,6 +40,10 @@ const articlesSlice = createSlice({
     },
     setPageSize: (state, action: PayloadAction<number>) => {
       state.pageSize = action.payload;
+    },
+    // DEBUG: Allow to change article preview card type for demonstration purposes.
+    setCardType: (state, action: PayloadAction<TArticleCardType>) => {
+      state.cardType = action.payload;
     },
     resetData: (state) => {
       state.error = undefined;
@@ -132,11 +137,18 @@ export const selectArticleById = (state: TArticlesState, id: TArticleId): TArtic
   state.articlesHash[id];
 export const selectParams = (state: TArticlesState): TArticlesParams => {
   // TODO: To memoize entire params object?
-  const { query, sortMode, pageNo, pageSize } = state;
-  return { query, sortMode, pageNo, pageSize };
+  const { query, sortMode, pageNo, pageSize, cardType } = state;
+  return { query, sortMode, pageNo, pageSize, cardType };
 };
 
-export const { setQuery, setSortMode, setPageNo, setNextPage, setPageSize, resetData } =
-  articlesSlice.actions;
+export const {
+  setQuery,
+  setSortMode,
+  setPageNo,
+  setNextPage,
+  setPageSize,
+  setCardType,
+  resetData,
+} = articlesSlice.actions;
 
 export const articlesReducer = articlesSlice.reducer;

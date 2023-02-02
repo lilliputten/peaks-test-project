@@ -1,6 +1,6 @@
 /** @module constants
  *  @since 2023.01.28, 19:17
- *  @changed 2023.01.28, 20:29
+ *  @changed 2023.02.02, 08:33
  */
 
 import * as buildConfig from '@/config/build';
@@ -33,6 +33,8 @@ export const defaultParams: TArticlesParams = {
   sortMode: defaultSortMode,
   pageNo: startPageNo,
   pageSize: defaultPageSize,
+  // DEBUG: Allow to change article preview card type for demonstration purposes.
+  cardType: 'medium',
 };
 
 // Default state

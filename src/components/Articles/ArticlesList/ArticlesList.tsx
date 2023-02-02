@@ -1,13 +1,13 @@
 /** @module ArticlesList
  *  @since 2023.01.27, 19:57
- *  @changed 2023.02.02, 03:36
+ *  @changed 2023.02.02, 08:33
  */
 
 import React, { useEffect, useMemo, useRef } from 'react';
 import { compose } from 'redux';
 import classnames from 'classnames';
 
-import { useArticles } from '@/core/app/app-reducer';
+import { useArticles, useArticlesSearchParams } from '@/core/app/app-reducer';
 import { TWithDynamicScrollerProps, withDynamicScrollerFabric } from '@/ui-elements';
 import { setNextPage } from '@/features/articles/reducer';
 import { ArticleCardById, EmptyArticleCard } from '../ArticleCard';
@@ -26,10 +26,8 @@ export function ArticlesList(props: TArticlesListProps): JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
 
   // TODO: To make card type selectable (for demo purposes)
-  // const cardType = 'large';
-  // const cardType = 'smallText';
-  // const cardType = 'small';
-  const cardType = 'medium';
+  // const cardType = 'medium';
+  const { cardType } = useArticlesSearchParams();
 
   useEffect(() => {
     if (setListContainerRef) {
@@ -60,7 +58,7 @@ export function ArticlesList(props: TArticlesListProps): JSX.Element {
       const { id, uniqueId } = article;
       return <ArticleCardById cardType={cardType} key={uniqueId || id} id={id} />;
     });
-  }, [articles]);
+  }, [articles, cardType]);
 
   return (
     <div ref={ref} className={classnames(className, styles.container)}>

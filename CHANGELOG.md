@@ -1,9 +1,10 @@
 <!--
-@changed 2023.02.02, 05:41
+@changed 2023.02.02, 08:54
 -->
 
 # Changelog
 
+- 2023.02.02, 08:54 -- Added Select component. Added two dropdown selectors for card type (demo functionality) and sort mode (from task description), added cardType property to the store (demo).
 - 2023.02.02, 05:41 -- Pass article id as query parameter insterad slug (for demo server without ssr).
 - 2023.02.02, 04:23 -- Added dynamic scroller component (articles loaded dynamically with user scroll), added workaround for duplicated articles, added empty article card (for case if some articles hasn't loaded).
 - 2023.02.02, 01:46 -- Implemented articles search functionality.
