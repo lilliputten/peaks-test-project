@@ -21,7 +21,7 @@ export const fetchArticlesThunk = createAsyncThunk(
 export function fetchArticlesAction(rootStore: Store<RootState>): void {
   const thunkDispatch = rootStore.dispatch as ThunkDispatch<RootState, void, AnyAction>;
   const articlesState = rootStore.getState().articles;
-  const { query, sortMode, pageNo, pageSize } = articlesState;
-  const params: TFetchArticlesThunkParams = { query, sortMode, pageNo, pageSize };
+  const { query, sortMode, pageNo, pageSize, cardType } = articlesState;
+  const params: TFetchArticlesThunkParams = { query, sortMode, pageNo, pageSize, cardType };
   thunkDispatch(fetchArticlesThunk(params));
 }

@@ -1,5 +1,5 @@
 <!--
-@changed 2023.01.31, 01:26
+@changed 2023.02.02, 08:57
 -->
 
 # Peaks nextjs static client app
@@ -44,8 +44,17 @@ To just publish previously created build:
 npm run publish
 ```
 
-## Deply server
+## Deploy server
 
 When publishing, the project is deployed to
 [https://peaks.lilliputten.ru/](https://peaks.lilliputten.ru/)
 (access credentials are provided by request).
+
+## State of the project
+
+As on 2023.02.02, 08:58 remains not implemented:
+
+- Main page (top articles). Instead displaying the same component for articles listing/searching (added abilty to change card types to demonstrate the types of cards that should be used on the main page).
+- Coloring of article preview cards (by sections?).
+- Bookmarking (buttons, page with listing of all bookmarked articles).
+- Bookmark action toasts.
