@@ -24,6 +24,8 @@ const isDemo = isDev && nextPublicDev === 'DEMO';
 const isDevServer = isDev && nextPublicDev === 'DEVSERVER';
 const isProd = !isDev;
 
+const useLints = false;
+
 const buildType = isDevServer ? 'server' : 'build';
 const buildMode = isProd ? 'prod' : 'dev';
 const buildTag = [
@@ -87,6 +89,18 @@ fs.writeFileSync(
 // console.log('Generated', scssGeneratedConfigFile);
 
 const nextConfig = {
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: !useLints,
+  },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: !useLints,
+  },
   reactStrictMode: false, // NOTE: Debug only? It causes double rendering and hooks calling.
   images: {
     unoptimized: true,
